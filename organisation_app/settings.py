@@ -27,9 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-bzu&k(b6ebquqs$&jv$o1kvpa1osq(b9v1i%#h4i_2+!os$#3a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = "DEV" in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    os.environ.get("ALLOWED_HOST"),
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -41,9 +45,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     "rest_framework",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
     "app_profile",
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -137,3 +149,23 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        (
+            "rest_framework.authentication.SessionAuthentication"
+            if "DEV" in os.environ
+            else "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
+        )
+    ],
+}
+
+REST_USE_JWT = True  # enables JWT token usage
+JWT_AUTH_SECURE = True  # ensures tokens send over HTTPS only
+JWT_AUTH_COOKIE = "my-app-auth"  # access token
+JWT_AUTH_REFRESH_COOKIE = "my refresh-token"  # refresh token
+
+REST_AUTH_SERIALIZERS = {
+    "USER_SETAILS_SERIALIZER": "drf_api.serializers.CurrentUserSerializer"
+}
