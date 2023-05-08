@@ -50,7 +50,9 @@ class EventTime(models.Model):
     Event time model, related to event through event_id foreign key.
     """
 
-    event_id = models.ForeignKey(Event, related_name="time", on_delete=models.CASCADE)
+    event_id = models.ForeignKey(
+        Event, related_name="time", on_delete=models.CASCADE
+    )
     start_date = models.DateField()
     end_date = models.DateField()
     start_time = models.TimeField()

@@ -184,5 +184,5 @@ JWT_AUTH_COOKIE = "my-app-auth"  # access token
 JWT_AUTH_REFRESH_COOKIE = "my refresh-token"  # refresh token
 
 REST_AUTH_SERIALIZERS = {
-    "USER_SETAILS_SERIALIZER": "drf_api.serializers.CurrentUserSerializer"
+    "USER_DETAILS_SERIALIZER": "organisation_app.serializers.CurrentUserSerializer"
 }
