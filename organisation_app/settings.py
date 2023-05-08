@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 if os.path.exists("env.py"):
     import env
+
+CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
+MEDIA_URL = "/media/"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +49,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
@@ -54,6 +61,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "dj_rest_auth",
     "app_profile",
+    "app_event",
 ]
 SITE_ID = 1
 
@@ -93,21 +101,24 @@ WSGI_APPLICATION = "organisation_app.wsgi.application"
 
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#     "ENGINE": "django.db.backends.sqlite3",
+#     "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+if "DEV" in os.environ:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "organisation_app",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "localhost",
+            "PORT": "5432",
+        },
+    }
+else:
+    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "organisation_app",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "localhost",
-        "PORT": "5432",
-    },
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
