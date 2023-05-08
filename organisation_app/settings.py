@@ -29,7 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-bzu&k(b6ebquqs$&jv$o1kvpa1osq(b9v1i%#h4i_2+!os$#3a"
+SECRET_KEY = (
+    "django-insecure-bzu&k(b6ebquqs$&jv$o1kvpa1osq(b9v1i%#h4i_2+!os$#3a"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = "DEV" in os.environ
@@ -117,7 +119,9 @@ if "DEV" in os.environ:
         },
     }
 else:
-    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
 
 # Password validation
@@ -162,7 +166,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
     "DEFAULT_AUTHENTICATION_CLASSES": [
         (
             "rest_framework.authentication.SessionAuthentication"
