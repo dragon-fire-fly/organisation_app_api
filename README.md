@@ -2,6 +2,38 @@
 
 # User Stories
 
+For backend:
+
+| Category             | as a    | I want to                      | so that I can                                                                                                 | mapping API feature |
+| -------------------- | ------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------- |
+| Account registration | visitor | register for an account        | have a user profile with picture and have full access to the site, make, comment on and like posts and events |                     |
+| Posts                | visitor | view a list of posts           | view recent uploads and decide if I want to sign up                                                           |                     |
+|                      | visitor | view individual posts          | read the post in more detail and see the associated comments                                                  |                     |
+|                      | user    | create new posts               |                                                                                                               |                     |
+|                      | user    | edit and delete my own posts   |                                                                                                               |                     |
+|                      | user    | like other user's posts        |                                                                                                               |                     |
+|                      | user    | unlike other user's posts      |                                                                                                               |                     |
+|                      | user    | comment on other user's posts  |                                                                                                               |                     |
+|                      | user    | edit and delete my comments    |                                                                                                               |                     |
+|                      | user    |                                |                                                                                                               |                     |
+|                      | user    |                                |                                                                                                               |                     |
+| Events               | visitor | view public events             | see what events are planned and see if I would like to create an account to add the event(s) to my calendar   |                     |
+|                      | visitor | view individual events         | see more detail about the event and see any associated comments                                               |                     |
+|                      | user    | create new events              |                                                                                                               |                     |
+|                      | user    | edit and delete my own events  |                                                                                                               |                     |
+|                      | user    | like other user's events       |                                                                                                               |                     |
+|                      | user    | comment on other user's events |                                                                                                               |                     |
+|                      | user    | add events to my calendar      |                                                                                                               |                     |
+|                      | user    | remove events from my calendar |                                                                                                               |                     |
+|                      | user    |                                |                                                                                                               |                     |
+|                      | user    |                                |                                                                                                               |                     |
+
+# Wireframes
+
+![Event Page](documentation/event_page.png)
+![Individual Event Page](documentation/individual_event.png)
+![Calendar Page](documentation/calendar_page.png)
+
 # API Entity Relationship Diagram
 
 ![API ERD](documentation/API_ERD2.png)
@@ -53,13 +85,12 @@
 
 ## Likes
 
-| HTTP   | URI            | CRUD Operation              | View name |
-| ------ | -------------- | --------------------------- | --------- |
-| GET    | /likes/        | list all likes              | LIST      |
-| POST   | /likes/        | create a like               | LIST      |
-| GET    | /comment/{id}/ | retrieve a specific comment | DETAIL    |
-| PUT    | /comment/{id}/ | update a specific comment   | DETAIL    |
-| DELETE | /comment/{id}/ | delete a specific comment   | DETAIL    |
+| HTTP   | URI            | CRUD Operation           | View name |
+| ------ | -------------- | ------------------------ | --------- |
+| GET    | /likes/        | list all likes           | LIST      |
+| POST   | /likes/        | create a like            | LIST      |
+| GET    | /comment/{id}/ | retrieve a specific like | DETAIL    |
+| DELETE | /comment/{id}/ | delete a specific like   | DETAIL    |
 
 ## Memories
 
@@ -88,3 +119,7 @@
 | GET  | /calendars/     | list all calendars           | LIST      |
 | GET  | /calendar/{id}/ | retrieve a specific calendar | DETAIL    |
 | PUT  | /calendar/{id}/ | update a specific calendar   | DETAIL    |
+
+# References
+
+Creating events in google calendar: https://developers.google.com/calendar/api/guides/create-events
