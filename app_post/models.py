@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from app_event.models import Event
 
 class Post(models.Model):
     """
@@ -8,6 +9,7 @@ class Post(models.Model):
     """
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
