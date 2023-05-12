@@ -85,12 +85,12 @@ For backend:
 
 ## Likes
 
-| HTTP   | URI            | CRUD Operation           | View name |
-| ------ | -------------- | ------------------------ | --------- |
-| GET    | /likes/        | list all likes           | LIST      |
-| POST   | /likes/        | create a like            | LIST      |
-| GET    | /comment/{id}/ | retrieve a specific like | DETAIL    |
-| DELETE | /comment/{id}/ | delete a specific like   | DETAIL    |
+| HTTP   | URI         | CRUD Operation           | View name |
+| ------ | ----------- | ------------------------ | --------- |
+| GET    | /likes/     | list all likes           | LIST      |
+| POST   | /likes/     | create a like            | LIST      |
+| GET    | /like/{id}/ | retrieve a specific like | DETAIL    |
+| DELETE | /like/{id}/ | delete a specific like   | DETAIL    |
 
 ## Memories
 
