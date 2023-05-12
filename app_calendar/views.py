@@ -14,6 +14,15 @@ class CalendarList(generics.ListAPIView):
     serializer_class = CalendarSerializer
 
 
+class CalendarCreateEvent(generics.CreateAPIView):
+    """
+    Add an event to a calendar
+    """
+
+    queryset = Calendar.objects.all()
+    serializer_class = CalendarSerializer
+
+
 class CalendarDetail(generics.RetrieveUpdateAPIView):
     """
     Retrieve or update a calendar if you're the owner.
