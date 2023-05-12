@@ -6,6 +6,7 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source="owner.profile.id")
     profile_image = serializers.ReadOnlyField(source="owner.profile.image.url")
+    comments_count = serializers.ReadOnlyField()
     # event = serializers.ReadOnlyField(source="event.title")
 
     def get_is_owner(self, obj):
@@ -26,4 +27,5 @@ class PostSerializer(serializers.ModelSerializer):
             "content",
             "image",
             "event",
+            "comments_count"
         ]
