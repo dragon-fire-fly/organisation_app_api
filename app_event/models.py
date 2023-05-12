@@ -40,7 +40,7 @@ class Event(models.Model):
         upload_to="images/", default="../sd2as2klixs1ijw9022d", blank=True
     )
     event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
-    location = models.URLField()
+    location = models.CharField(max_length=255)
     start_at = models.DateTimeField(null=True)
     end_at = models.DateTimeField(null=True)
     all_day = models.BooleanField(default=False)
