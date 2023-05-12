@@ -1,10 +1,11 @@
+from django.db.models import Count
 from .serializers import EventSerializer, EventTimeSerializer
 from .models import Event, EventTime
 from rest_framework import generics
 
 
 class EventList(generics.ListCreateAPIView):
-    queryset = Event.objects.all().order_by("-created_at")
+    queryset = Event.objects.annotate(memories_count=Count("memories", distinct=True)).order_by("-created_at")
     serializer_class = EventSerializer
 
     def perform_create(self, serializer):

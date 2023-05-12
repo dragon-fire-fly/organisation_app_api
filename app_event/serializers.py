@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Event, EventTime
 from django.contrib.auth.models import User
+from app_memory.serializers import MemorySerializer
 
 
 class EventTimeSerializer(serializers.ModelSerializer):
@@ -21,6 +22,8 @@ class EventSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
     event_time = EventTimeSerializer(many=True, read_only=True, source="time")
+    memories_count = serializers.ReadOnlyField()
+    memories = MemorySerializer(many=True, read_only=True)
 
     def get_is_owner(self, obj):
         request = self.context["request"]
@@ -38,4 +41,6 @@ class EventSerializer(serializers.ModelSerializer):
             "event_type",
             "event_time",
             "privacy",
+            "memories_count",
+            "memories"
         ]
