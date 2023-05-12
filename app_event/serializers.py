@@ -34,5 +34,8 @@ class EventSerializer(serializers.ModelSerializer):
             "is_owner",
             "title",
             "content",
+            "image",
+            "event_type",
             "event_time",
+            "privacy"
         ]

@@ -36,7 +36,7 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to="images/", default="../default_post_rgq6aq", blank=True
+        upload_to="images/", default="../sd2as2klixs1ijw9022d", blank=True
     )
     event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
     location = models.URLField()
