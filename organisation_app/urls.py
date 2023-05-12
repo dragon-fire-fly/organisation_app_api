@@ -28,4 +28,5 @@ urlpatterns = [
     path("", include("app_event.urls")),
     path("", include("app_post.urls")),
     path("", include("app_comment.urls")),
+    path("", include("app_like.urls")),
 ]
