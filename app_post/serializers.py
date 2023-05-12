@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Post
 from app_like.models import Like
 
+
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()

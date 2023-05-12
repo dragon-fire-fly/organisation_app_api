@@ -5,17 +5,21 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_event', '0002_alter_event_image'),
-        ('app_post', '0002_alter_post_image'),
+        ("app_event", "0002_alter_event_image"),
+        ("app_post", "0002_alter_post_image"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='event',
-            field=models.ForeignKey(blank=True, default=1, on_delete=django.db.models.deletion.CASCADE, to='app_event.event'),
+            model_name="post",
+            name="event",
+            field=models.ForeignKey(
+                blank=True,
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="app_event.event",
+            ),
             preserve_default=False,
         ),
     ]

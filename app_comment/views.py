@@ -10,6 +10,7 @@ class CommentList(generics.ListCreateAPIView):
     List all comments.
     perform_create method for comment creation.
     """
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()

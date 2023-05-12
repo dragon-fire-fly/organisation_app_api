@@ -4,6 +4,7 @@ from organisation_app.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 
+
 class PostList(generics.ListCreateAPIView):
     """
     List posts or create a post if logged in
@@ -28,4 +29,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Post.objects.annotate(comments_count=Count("comment", distinct=True), likes_count=Count("likes", distinct=True),).order_by("-created_at")
+    queryset = Post.objects.annotate(
+        comments_count=Count("comment", distinct=True),
+        likes_count=Count("likes", distinct=True),
+    ).order_by("-created_at")

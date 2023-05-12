@@ -37,5 +37,5 @@ class EventSerializer(serializers.ModelSerializer):
             "image",
             "event_type",
             "event_time",
-            "privacy"
+            "privacy",
         ]
