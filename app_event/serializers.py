@@ -24,12 +24,11 @@ class EventSerializer(serializers.ModelSerializer):
             "content",
             "image",
             "event_type",
-            "start_date",
-            "end_date",
-            "start_time",
-            "end_time",
+            "start_at",
+            "end_at",
             "all_day",
             "privacy",
             "memories_count",
-            "memories"
+            "memories",
+            "calendars",
         ]

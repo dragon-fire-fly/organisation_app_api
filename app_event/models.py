@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from app_calendar.models import Calendar
 
 EVENT_TYPES = [
     ("0", "Educational"),
@@ -40,11 +41,10 @@ class Event(models.Model):
     )
     event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
     location = models.URLField()
-    start_date = models.DateField()
-    end_date = models.DateField(null=True)
-    start_time = models.TimeField()
-    end_time = models.TimeField(null=True)
+    start_at = models.DateTimeField(null=True)
+    end_at = models.DateTimeField(null=True)
     all_day = models.BooleanField(default=False)
     privacy = models.CharField(max_length=100, choices=PRIVACY_TYPES)
     past = models.BooleanField(null=True)
     notification = models.BooleanField(default=False)
+    calendars = models.ManyToManyField(Calendar, related_name="events")
