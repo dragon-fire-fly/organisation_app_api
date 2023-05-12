@@ -7,8 +7,4 @@ class CalendarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Calendar
-        fields = [
-            "id",
-            "owner",
-            "events"
-        ]
+        fields = ["id", "owner", "events"]

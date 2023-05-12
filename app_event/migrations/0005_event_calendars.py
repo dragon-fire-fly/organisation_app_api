@@ -4,16 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_calendar', '0002_remove_calendar_events'),
-        ('app_event', '0004_auto_20230512_1236'),
+        ("app_calendar", "0002_remove_calendar_events"),
+        ("app_event", "0004_auto_20230512_1236"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='calendars',
-            field=models.ManyToManyField(related_name='events', to='app_calendar.Calendar'),
+            model_name="event",
+            name="calendars",
+            field=models.ManyToManyField(
+                related_name="events", to="app_calendar.Calendar"
+            ),
         ),
     ]

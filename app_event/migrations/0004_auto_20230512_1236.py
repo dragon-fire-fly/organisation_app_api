@@ -4,41 +4,40 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_event', '0003_auto_20230512_1217'),
+        ("app_event", "0003_auto_20230512_1217"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='event',
-            name='end_date',
+            model_name="event",
+            name="end_date",
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='end_time',
+            model_name="event",
+            name="end_time",
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='start_date',
+            model_name="event",
+            name="start_date",
         ),
         migrations.RemoveField(
-            model_name='event',
-            name='start_time',
+            model_name="event",
+            name="start_time",
         ),
         migrations.AddField(
-            model_name='event',
-            name='end_at',
+            model_name="event",
+            name="end_at",
             field=models.DateTimeField(null=True),
         ),
         migrations.AddField(
-            model_name='event',
-            name='start_at',
+            model_name="event",
+            name="start_at",
             field=models.DateTimeField(null=True),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='all_day',
+            model_name="event",
+            name="all_day",
             field=models.BooleanField(default=False),
         ),
     ]
