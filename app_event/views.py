@@ -1,7 +1,7 @@
 from django.db.models import Count
 from organisation_app.permissions import IsOwnerOrReadOnly
-from .serializers import EventSerializer, EventTimeSerializer
-from .models import Event, EventTime
+from .serializers import EventSerializer
+from .models import Event
 from rest_framework import generics, permissions
 
 
@@ -28,14 +28,3 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
 
-
-class EventTimeList(generics.ListCreateAPIView):
-    queryset = EventTime.objects.all()
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = EventTimeSerializer
-
-
-class EventTimeDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = EventTime.objects.all()
-    permission_classes = [IsOwnerOrReadOnly]
-    serializer_class = EventTimeSerializer

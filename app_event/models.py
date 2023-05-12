@@ -40,21 +40,11 @@ class Event(models.Model):
     )
     event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
     location = models.URLField()
+    start_date = models.DateField()
+    end_date = models.DateField(null=True)
+    start_time = models.TimeField()
+    end_time = models.TimeField(null=True)
+    all_day = models.BooleanField(default=False)
     privacy = models.CharField(max_length=100, choices=PRIVACY_TYPES)
     past = models.BooleanField(null=True)
     notification = models.BooleanField(default=False)
-
-
-class EventTime(models.Model):
-    """
-    Event time model, related to event through event_id foreign key.
-    """
-
-    event_id = models.ForeignKey(
-        Event, related_name="time", on_delete=models.CASCADE
-    )
-    start_date = models.DateField()
-    end_date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    all_day = models.BooleanField()
