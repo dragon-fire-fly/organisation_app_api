@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Calendar(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
 
 def create_calendar(sender, instance, created, **kwargs):
     if created:
