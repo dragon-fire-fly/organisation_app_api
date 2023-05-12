@@ -29,4 +29,5 @@ urlpatterns = [
     path("", include("app_post.urls")),
     path("", include("app_comment.urls")),
     path("", include("app_like.urls")),
+    path("", include("app_follower.urls")),
 ]

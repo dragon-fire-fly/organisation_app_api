@@ -109,7 +109,6 @@ For backend:
 | GET    | /followers/     | list all followers           | LIST      |
 | POST   | /followers/     | create a follower            | LIST      |
 | GET    | /follower/{id}/ | retrieve a specific follower | DETAIL    |
-| PUT    | /follower/{id}/ | update a specific follower   | DETAIL    |
 | DELETE | /follower/{id}/ | delete a specific follower   | DETAIL    |
 
 ## Calendars
