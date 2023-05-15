@@ -29,9 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-bzu&k(b6ebquqs$&jv$o1kvpa1osq(b9v1i%#h4i_2+!os$#3a"
-)
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = "DEV" in os.environ
@@ -59,6 +57,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    'corsheaders',
     "rest_framework",
     "rest_framework.authtoken",
     "dj_rest_auth",
@@ -74,6 +73,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -82,6 +82,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+
+if "CLIENT_ORIGIN_DEV" in os.environ:
+    CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN_DEV")]
+
+else:
+    CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN")]
 
 ROOT_URLCONF = "organisation_app.urls"
 
@@ -128,6 +136,7 @@ else:
     DATABASES = {
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
+    print("connected")
 
 
 # Password validation
@@ -188,6 +197,7 @@ REST_USE_JWT = True  # enables JWT token usage
 JWT_AUTH_SECURE = True  # ensures tokens send over HTTPS only
 JWT_AUTH_COOKIE = "my-app-auth"  # access token
 JWT_AUTH_REFRESH_COOKIE = "my refresh-token"  # refresh token
+JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "organisation_app.serializers.CurrentUserSerializer"
