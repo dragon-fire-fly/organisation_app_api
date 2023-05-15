@@ -5,3 +5,4 @@ env.py
 client_secret_organisation_app.json
 client_secret_desktop.json
 token files/token_calendar_v3.pickle
+/staticfiles

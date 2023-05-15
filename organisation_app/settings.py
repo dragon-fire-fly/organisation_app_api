@@ -204,6 +204,11 @@ REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "organisation_app.serializers.CurrentUserSerializer"
 }
 
+if "DEV" not in os.environ:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
