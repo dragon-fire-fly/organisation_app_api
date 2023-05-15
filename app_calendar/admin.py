@@ -12,7 +12,6 @@ class CalendarAdmin(admin.ModelAdmin):
     inlines = [EventInLine]
 
     def get_events(self, instance):
-        breakpoint()
         return [event for event in instance.events.all()]
 
 

@@ -26,9 +26,9 @@ class EventSerializer(serializers.ModelSerializer):
             "event_type",
             "start_at",
             "end_at",
+            "timezone",
             "all_day",
             "privacy",
             "memories_count",
             "memories",
-            "calendars",
         ]

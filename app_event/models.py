@@ -11,7 +11,7 @@ if os.path.exists("env.py"):
 # API request for timezone info
 TIME_ZONE_TOKEN = os.environ.get("TIME_ZONE_TOKEN")
 try:
-    response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
+    # response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
     data = response.json()
     timezone = data['data']['timezone']['id']
 except:
@@ -42,7 +42,7 @@ PRIVACY_TYPES = [
 
 TIMEZONES = []
 for time in pytz.common_timezones:
-    TIMEZONES.append((time.lower(), time))
+    TIMEZONES.append((time, time))
 
 
 class Event(models.Model):
