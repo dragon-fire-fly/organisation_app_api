@@ -52,15 +52,15 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "django.contrib.staticfiles",
     "cloudinary",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     'corsheaders',
-    "rest_framework",
-    "rest_framework.authtoken",
-    "dj_rest_auth",
     "app_profile",
     "app_event",
     "app_post",
@@ -212,3 +212,5 @@ if "DEV" not in os.environ:
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
