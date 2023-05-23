@@ -18,20 +18,20 @@ except:
     timezone = "UTC"
 
 EVENT_TYPES = [
-    ("0", "Educational"),
-    ("1", "Cultural"),
-    ("2", "Recreational"),
-    ("3", "Fundraiser"),
-    ("4", "Private"),
-    ("5", "Work"),
-    ("6", "Exhibition"),
-    ("7", "Festival"),
-    ("8", "Concert"),
-    ("9", "Cinema"),
-    ("10", "Party"),
-    ("11", "Seminar"),
-    ("11", "Personal"),
-    ("13", "Other"),
+    ("Educational", "Educational"),
+    ("Cultural", "Cultural"),
+    ("Recreational", "Recreational"),
+    ("Fundraiser", "Fundraiser"),
+    ("Private", "Private"),
+    ("Work", "Work"),
+    ("Exhibition", "Exhibition"),
+    ("Festival", "Festival"),
+    ("Concert", "Concert"),
+    ("Cinema", "Cinema"),
+    ("Party", "Party"),
+    ("Seminar", "Seminar"),
+    ("Personal", "Personal"),
+    ("Other", "Other"),
 ]
 
 PRIVACY_TYPES = [
@@ -61,14 +61,14 @@ class Event(models.Model):
     )
     event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
     location = models.CharField(max_length=255)
-    start_at = models.DateTimeField(null=True)
-    end_at = models.DateTimeField(null=True)
+    start = models.DateTimeField(null=True)
+    end = models.DateTimeField(null=True)
     all_day = models.BooleanField(default=False)
     privacy = models.CharField(max_length=100, choices=PRIVACY_TYPES)
     past = models.BooleanField(null=True)
     notification = models.BooleanField(default=False)
     calendars = models.ManyToManyField(Calendar, related_name="events")
-    timezone = models.CharField(max_length=255, choices=TIMEZONES, default=timezone)
+    timezone = models.CharField(max_length=255, choices=TIMEZONES, default="UTC")
 
     def get_calendars(self):
         calendars = Calendar.objects.filter(pk=self.owner)
