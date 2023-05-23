@@ -2,7 +2,8 @@ from django.db.models import Count
 from organisation_app.permissions import IsOwnerOrReadOnly
 from .serializers import EventSerializer, CalendarEventSerializer
 from .models import Event
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class EventList(generics.ListCreateAPIView):
@@ -16,7 +17,20 @@ class EventList(generics.ListCreateAPIView):
     ).order_by("-created_at")
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = EventSerializer
-
+    filter_backends = [
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        "title"
+    ]
+    search_fields = [
+        "owner__username",
+        "title",
+        "content",
+        "event_type",
+        "location",
+    ]
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -29,6 +43,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all().order_by("-created_at")
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
+    
 
 class CalendarEventDetail(generics.ListAPIView):
     """
@@ -38,3 +53,13 @@ class CalendarEventDetail(generics.ListAPIView):
     queryset = Event.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CalendarEventSerializer
+    filter_backends = [
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        "title"
+    ]
+    search_fields = [
+        "title",
+    ]
