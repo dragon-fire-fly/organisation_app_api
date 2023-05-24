@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     calendar = CalendarSerializer(read_only=True, source="owner.calendar")
     following_id = serializers.SerializerMethodField()
     posts_count = serializers.ReadOnlyField()
+    events_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
 
@@ -38,6 +39,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "is_owner",
             "following_id",
             "posts_count",
+            "events_count",
             "followers_count",
             "following_count",
         ]
