@@ -28,11 +28,12 @@ urlpatterns = [
         "dj-rest-auth/registration/", include("dj_rest_auth.registration.urls")
     ),
     path("", include("app_profile.urls")),
-    path("", include("app_event.urls")),
     path("", include("app_post.urls")),
     path("", include("app_comment.urls")),
     path("", include("app_like.urls")),
-    path("", include("app_follower.urls")),
+    path("", include("app_event.urls")),
+    path("", include("app_watch.urls")),
     path("", include("app_memory.urls")),
+    path("", include("app_follower.urls")),
     path("", include("app_calendar.urls")),
 ]
