@@ -14,12 +14,12 @@ class MemoryList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = MemorySerializer
     queryset = Memory.objects.all()
-    # filter_backends = [
-    #     DjangoFilterBackend,
-    # ]
-    # filterset_fields = [
-    #     "post",
-    # ]
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        "event",
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

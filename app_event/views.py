@@ -12,17 +12,20 @@ class EventList(generics.ListCreateAPIView):
     The perform_create method associates the event with the logged in user.
     """
 
-    queryset = Event.objects.annotate(
-        memories_count=Count("memories", distinct=True)
-    ).order_by("-created_at")
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = EventSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Event.objects.annotate(
+        memories_count=Count("memory", distinct=True)
+    ).order_by("-created_at")
     filter_backends = [
+        filters.OrderingFilter,
         filters.SearchFilter,
         DjangoFilterBackend,
     ]
     filterset_fields = [
-        "title"
+        # 'owner__followed__owner__profile',
+        # 'likes__owner__profile',
+        'owner__profile',
     ]
     search_fields = [
         "owner__username",
@@ -30,6 +33,11 @@ class EventList(generics.ListCreateAPIView):
         "content",
         "event_type",
         "location",
+    ]
+    ordering_fields = [
+        # 'likes_count',
+        # 'likes__created_at',
+        'memories_count',
     ]
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -40,7 +48,10 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve an event and edit or delete it if you own it.
     """
 
-    queryset = Event.objects.all().order_by("-created_at")
+    queryset = Event.objects.annotate(
+        # likes_count=Count('likes', distinct=True),
+        memories_count=Count('memory', distinct=True)
+    ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
     
