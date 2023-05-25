@@ -15,6 +15,7 @@ class EventList(generics.ListCreateAPIView):
     serializer_class = EventSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Event.objects.annotate(
+        watches_count=Count('watches', distinct=True),
         memories_count=Count("memory", distinct=True)
     ).order_by("-created_at")
     filter_backends = [
@@ -24,7 +25,7 @@ class EventList(generics.ListCreateAPIView):
     ]
     filterset_fields = [
         # 'owner__followed__owner__profile',
-        # 'likes__owner__profile',
+        'watches__owner__profile',
         'owner__profile',
     ]
     search_fields = [
@@ -35,8 +36,8 @@ class EventList(generics.ListCreateAPIView):
         "location",
     ]
     ordering_fields = [
-        # 'likes_count',
-        # 'likes__created_at',
+        'watches_count',
+        'watches__created_at',
         'memories_count',
     ]
     def perform_create(self, serializer):
@@ -49,7 +50,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     """
 
     queryset = Event.objects.annotate(
-        # likes_count=Count('likes', distinct=True),
+        watches_count=Count('watches', distinct=True),
         memories_count=Count('memory', distinct=True)
     ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]

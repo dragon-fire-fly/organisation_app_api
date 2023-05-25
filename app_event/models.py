@@ -59,7 +59,7 @@ class Event(models.Model):
     image = models.ImageField(
         upload_to="images/", default="../sd2as2klixs1ijw9022d", blank=True
     )
-    event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
+    event_type = models.CharField(max_length=100, choices=EVENT_TYPES, default="Educational")
     location = models.CharField(max_length=255)
     start = models.DateTimeField(null=True)
     end = models.DateTimeField(null=True)
