@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Event
 from app_watch.models import Watch
+from app_calendar.models import Calendar
 from django.contrib.auth.models import User
 from app_memory.serializers import MemorySerializer
 
@@ -17,6 +18,10 @@ class EventSerializer(serializers.ModelSerializer):
     watch_id = serializers.SerializerMethodField()
     watches_count = serializers.ReadOnlyField()
     memories_count = serializers.ReadOnlyField()
+    calendars = serializers.PrimaryKeyRelatedField(
+        queryset=Calendar.objects.all(),
+        many=True,
+    )
 
     def get_is_owner(self, obj):
         request = self.context["request"]
@@ -26,10 +31,20 @@ class EventSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if user.is_authenticated:
             watch = Watch.objects.filter(
-                owner=user, post=obj
+                owner=user, event=obj
             ).first()
             return watch.id if watch else None
         return None
+
+    def create(self, validated_data):
+        validated_data["calendars"] = [validated_data["owner"].pk]
+        many_to_many_data = validated_data.pop('calendars', None)
+        instance = super().create(validated_data)
+
+        if many_to_many_data is not None:
+            instance.calendars.set(many_to_many_data)
+
+        return instance
 
     class Meta:
         model = Event
@@ -52,6 +67,7 @@ class EventSerializer(serializers.ModelSerializer):
             "watch_id",
             "watches_count",
             "memories_count",
+            "calendars"
         ]
 
 
