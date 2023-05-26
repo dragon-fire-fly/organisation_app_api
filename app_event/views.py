@@ -4,6 +4,7 @@ from .serializers import EventSerializer, CalendarEventSerializer
 from .models import Event
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
 
 
 class EventList(generics.ListCreateAPIView):
@@ -56,10 +57,17 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
 
+
+class CustomEventPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = "page_size"
+    max_page_size = 1000
+
 class CalendarEvents(generics.ListAPIView):
     """
     Retrieves events from the calendar of the logged in user.
     """
+    pagination_class = CustomEventPagination
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CalendarEventSerializer
     filter_backends = [
