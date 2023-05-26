@@ -55,14 +55,11 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
-    
 
-class CalendarEventDetail(generics.ListAPIView):
+class CalendarEvents(generics.ListAPIView):
     """
-    Retrieve an event for the calendar.
+    Retrieves events from the calendar of the logged in user.
     """
-
-    queryset = Event.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CalendarEventSerializer
     filter_backends = [
@@ -75,3 +72,7 @@ class CalendarEventDetail(generics.ListAPIView):
     search_fields = [
         "title",
     ]
+
+    def get_queryset(self):
+        queryset = Event.objects.filter(calendars=self.kwargs["pk"])
+        return queryset
