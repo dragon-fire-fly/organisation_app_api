@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Post
 from app_like.models import Like
+from app_event.serializers import EventSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -11,6 +12,7 @@ class PostSerializer(serializers.ModelSerializer):
     comments_count = serializers.ReadOnlyField()
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
+    event = EventSerializer()
 
     def get_is_owner(self, obj):
         request = self.context["request"]
