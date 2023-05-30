@@ -76,7 +76,7 @@ class CalendarEvents(generics.ListAPIView):
         filters.OrderingFilter,
     ]
     filterset_fields = [
-        "title"
+        "title",
         "owner__profile"
     ]
     search_fields = [
