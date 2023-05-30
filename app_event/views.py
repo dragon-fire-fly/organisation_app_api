@@ -73,14 +73,19 @@ class CalendarEvents(generics.ListAPIView):
     filter_backends = [
         filters.SearchFilter,
         DjangoFilterBackend,
+        filters.OrderingFilter,
     ]
     filterset_fields = [
         "title"
+        "owner__profile"
     ]
     search_fields = [
         "title",
     ]
+    ordering_fields = [
+        'start'
+    ]
 
     def get_queryset(self):
-        queryset = Event.objects.filter(calendars=self.kwargs["pk"])
+        queryset = Event.objects.filter(calendars=self.kwargs["pk"]).order_by('start')
         return queryset
