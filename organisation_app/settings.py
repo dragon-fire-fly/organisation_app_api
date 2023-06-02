@@ -88,11 +88,19 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
-if "CLIENT_ORIGIN_DEV" in os.environ:
-    CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN_DEV")]
+# if "CLIENT_ORIGIN_DEV" in os.environ:
+#     CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN_DEV")]
 
-else:
-    CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN")]
+# else:
+#     CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN")]
+
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN'),
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN'),
+]
 
 ROOT_URLCONF = "organisation_app.urls"
 
