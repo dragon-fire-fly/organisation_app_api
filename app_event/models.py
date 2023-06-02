@@ -65,11 +65,11 @@ class Event(models.Model):
     end = models.DateTimeField(null=True)
     all_day = models.BooleanField(default=False)
     privacy = models.CharField(max_length=100, choices=PRIVACY_TYPES)
-    past = models.BooleanField(null=True)
+    past = models.BooleanField(default=False, null=True)
     notification = models.BooleanField(default=False)
     calendars = models.ManyToManyField(Calendar, related_name="events")
     timezone = models.CharField(max_length=255, choices=TIMEZONES, default="UTC")
 
     def get_calendars(self):
         calendars = Calendar.objects.filter(pk=self.owner)
-        # calendars = self.owner.calendar
+    

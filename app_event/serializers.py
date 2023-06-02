@@ -4,6 +4,8 @@ from app_watch.models import Watch
 from app_calendar.models import Calendar
 from django.contrib.auth.models import User
 from app_memory.serializers import MemorySerializer
+from datetime import datetime
+import pytz
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -22,6 +24,7 @@ class EventSerializer(serializers.ModelSerializer):
         queryset=Calendar.objects.all(),
         many=True,
     )
+    past = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context["request"]
@@ -35,6 +38,14 @@ class EventSerializer(serializers.ModelSerializer):
             ).first()
             return watch.id if watch else None
         return None
+
+    def get_past(self, obj):
+        now = datetime.now(pytz.utc)
+        if (obj.start - now).days < 0:
+            past = True
+        else:
+            past = False
+        return past
 
     def create(self, validated_data):
         validated_data["calendars"] = [validated_data["owner"].pk]
@@ -69,6 +80,7 @@ class EventSerializer(serializers.ModelSerializer):
             "memories_count",
             "calendars",
             "posts",
+            "past",
         ]
 
 
