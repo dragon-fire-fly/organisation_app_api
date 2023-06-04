@@ -3,13 +3,12 @@ from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from organisation_app.permissions import IsOwnerOrReadOnly
 from .models import Post
-from .serializers import PostSerializer
+from .serializers import PostSerializer, CreatePostSerializer
 
 
-class PostList(generics.ListCreateAPIView):
+class PostList(generics.ListAPIView):
     """
-    List posts or create a post if logged in
-    The perform_create method associates the post with the logged in user.
+    List posts.
     """
 
     serializer_class = PostSerializer
@@ -37,6 +36,20 @@ class PostList(generics.ListCreateAPIView):
         "comments_count",
         "likes__created_at",
     ]
+
+
+class CreatePostList(generics.CreateAPIView):
+    """
+    Create a post if logged in
+    The perform_create method associates the post with the logged in user.
+    """
+
+    serializer_class = CreatePostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Post.objects.annotate(
+        likes_count=Count("likes", distinct=True),
+        comments_count=Count("comment", distinct=True),
+    ).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
