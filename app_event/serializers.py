@@ -3,10 +3,20 @@ from .models import Event
 from app_watch.models import Watch
 from app_calendar.models import Calendar
 from django.contrib.auth.models import User
+from rest_framework.serializers import ValidationError
 from app_memory.serializers import MemorySerializer
 from datetime import datetime
 import pytz
 
+class EventTimesValidator:
+    """
+    Compares the starting time and ending time of an event and raises
+    validation error if the ending time is before the starting time.
+    """
+
+    def validate_event_times(self, start, end):
+        if start and end and end < start:
+            raise ValidationError("An event cannot end before it has started!")
 
 class EventSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
@@ -46,6 +56,11 @@ class EventSerializer(serializers.ModelSerializer):
         else:
             past = False
         return past
+
+    def validate(self, data):
+        validator = EventTimesValidator()
+        validator.validate_event_times(data.get("start"), data.get("end"))
+        return data
 
     def create(self, validated_data):
         validated_data["calendars"] = [validated_data["owner"].pk]
