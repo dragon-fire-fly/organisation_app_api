@@ -3,7 +3,7 @@ from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from organisation_app.permissions import IsOwnerOrReadOnly
 from .models import Post
-from .serializers import PostSerializer, CreatePostSerializer
+from .serializers import PostWithEventSerializer, PostSerializer
 
 
 class PostList(generics.ListAPIView):
@@ -11,7 +11,7 @@ class PostList(generics.ListAPIView):
     List posts.
     """
 
-    serializer_class = PostSerializer
+    serializer_class = PostWithEventSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count("likes", distinct=True),
@@ -38,13 +38,13 @@ class PostList(generics.ListAPIView):
     ]
 
 
-class CreatePostList(generics.CreateAPIView):
+class CreatePost(generics.CreateAPIView):
     """
     Create a post if logged in
     The perform_create method associates the post with the logged in user.
     """
 
-    serializer_class = CreatePostSerializer
+    serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count("likes", distinct=True),
@@ -55,9 +55,21 @@ class CreatePostList(generics.CreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostDetail(generics.RetrieveAPIView):
     """
-    Retrieve a post and edit or delete it if you own it.
+    Retrieve a post.
+    """
+
+    serializer_class = PostWithEventSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Post.objects.annotate(
+        comments_count=Count("comment", distinct=True),
+        likes_count=Count("likes", distinct=True),
+    ).order_by("-created_at")
+
+class UpdatePost(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Edit or delete it if you own it.
     """
 
     serializer_class = PostSerializer
