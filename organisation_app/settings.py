@@ -17,12 +17,15 @@ import os
 if os.path.exists("env.py"):
     import env
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -88,12 +91,6 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
-# if "CLIENT_ORIGIN_DEV" in os.environ:
-#     CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN_DEV")]
-
-# else:
-#     CORS_ORIGIN_WHITELIST = [os.environ.get("CLIENT_ORIGIN")]
-
 CORS_ALLOWED_ORIGINS = [
     os.environ.get('CLIENT_ORIGIN'),
 ]
@@ -144,8 +141,17 @@ WSGI_APPLICATION = "organisation_app.wsgi.application"
 #         },
 #     }
 # else:
+#     DATABASES = {
+#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#     }
+
 DATABASES = {
-    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': ({
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if 'TEST' in os.environ else dj_database_url.parse(
+        os.environ.get('DATABASE_URL')
+    ))
 }
 
 
@@ -203,8 +209,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
+    # "DEFAULT_AUTHENTICATION_CLASSES": [
+    #     "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
+    # ],
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+        (
+            "rest_framework.authentication.SessionAuthentication"
+            if "DEV" in os.environ
+            else "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
+        )
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
