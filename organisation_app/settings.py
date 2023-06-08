@@ -92,9 +92,12 @@ else:
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
-    os.environ.get('CLIENT_ORIGIN'),
-]
+if os.getenv("GITHUB_WORKFLOW"):
+    CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+else:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN'),
+    ]
 
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get('CLIENT_ORIGIN'),
