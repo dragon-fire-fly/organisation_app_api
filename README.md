@@ -94,6 +94,8 @@ Event list route. Authenticated users can also create new events on this route
 ![event list route](documentation/features/events.png)
 Event detail route. Event owners can also edit and delete events on this page
 ![event detail route](documentation/features/event_detail.png)
+Calendar event route. This route is used by the calendar to retrieve all events from a specific calendar
+![calendar events list route](documentation/features/calendar_events.png)
 If the route for a non existant event is entered, a 404 error is returned
 ![event detail route](documentation/features/event_not_found.png)
 
