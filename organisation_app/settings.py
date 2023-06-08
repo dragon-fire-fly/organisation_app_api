@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import sys
 
 if os.path.exists("env.py"):
     import env
@@ -24,9 +25,6 @@ CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -42,7 +40,6 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
-
 
 # Application definition
 
@@ -123,36 +120,32 @@ WSGI_APPLICATION = "organisation_app.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#     "ENGINE": "django.db.backends.sqlite3",
-#     "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-# if "DEV" in os.environ:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": "organisation_app",
-#             "USER": "postgres",
-#             "PASSWORD": "postgres",
-#             "HOST": "localhost",
-#             "PORT": "5432",
-#         },
-#     }
-# else:
-#     DATABASES = {
-#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#     }
-
-DATABASES = {
-    'default': ({
+if os.getenv("GITHUB_WORKFLOW"):
+    # check if in GITHUB ACTION MODE
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "github-actions",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
+else:
+    # check if unittest running locally
+    if "test" in sys.argv[0] or "test" in sys.argv[1]:
+        DATABASES = {
+            "default": {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    } if 'TEST' in os.environ else dj_database_url.parse(
+            }
+        }
+    else:
+        DATABASES = {
+    'default': dj_database_url.parse(
         os.environ.get('DATABASE_URL')
-    ))
-}
+    )}
 
 
 
@@ -197,25 +190,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         (
-#             "rest_framework.authentication.SessionAuthentication"
-#             if "DEV" in os.environ
-#             else "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
-#         )
-#     ],
-
-# }
 
 REST_FRAMEWORK = {
-    # "DEFAULT_AUTHENTICATION_CLASSES": [
-    #     "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
-    # ],
         "DEFAULT_AUTHENTICATION_CLASSES": [
         (
             "rest_framework.authentication.SessionAuthentication"
-            if "DEV" in os.environ
+            if "test" in sys.argv[0] or "test" in sys.argv[1]
             else "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
         )
     ],

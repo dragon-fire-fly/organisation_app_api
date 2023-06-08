@@ -1,0 +1,55 @@
+name: CI Workflow
+
+# triggers for the workflow
+on: [push]
+
+jobs:
+  health-check-job: # health check job for testing and code formatting check
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        # the environment variable must match with app/settings.py
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github-actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      # checking our the code at current commit that triggers the workflow
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # caching dependency will make the build faster.
+      # for more info checkout pip section documentation at https://github.com/actions/cache
+      - name: Cache dependency
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Setup python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Check Python version
+        run: python --version
+
+      ### CI for Django
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run Database MakeMigrations
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: python manage.py makemigrations
+      - name: Run Database Migrations
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: python manage.py migrate
+      - name: Run django tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: python manage.py test
