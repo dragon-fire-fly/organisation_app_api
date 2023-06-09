@@ -18,6 +18,7 @@ class Memory(models.Model):
     image = models.ImageField(
         upload_to="images/", default="../sd2as2klixs1ijw9022d", blank=True
     )
+    plan = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["-created_at"]

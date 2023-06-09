@@ -35,6 +35,8 @@ class EventList(generics.ListCreateAPIView):
         "content",
         "event_type",
         "location",
+        "start",
+        "end",
     ]
     ordering_fields = [
         'watches_count',
@@ -77,7 +79,7 @@ class CalendarEvents(generics.ListAPIView):
     ]
     filterset_fields = [
         "title",
-        "owner__profile"
+        "owner__profile",
     ]
     search_fields = [
         "title",

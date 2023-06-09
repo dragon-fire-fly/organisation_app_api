@@ -2,7 +2,6 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from .models import Memory
 
-
 class MemorySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
@@ -10,6 +9,7 @@ class MemorySerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source="owner.profile.image.url")
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
+    plan = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context["request"]
@@ -20,6 +20,13 @@ class MemorySerializer(serializers.ModelSerializer):
 
     def get_updated_at(self, obj):
         return naturaltime(obj.updated_at)
+
+    def get_plan(self,obj):
+        if (obj.event.start - obj.created_at).days < 0:
+            plan = False
+        else:
+            plan = True
+        return plan
 
     class Meta:
         model = Memory
@@ -34,6 +41,7 @@ class MemorySerializer(serializers.ModelSerializer):
             "updated_at",
             "content",
             "image",
+            "plan",
         ]
 
 
