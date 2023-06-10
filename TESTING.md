@@ -30,7 +30,9 @@ To install and run pycode style:
 ## Manual Testing
 
 Manual testing was performed for the API using Postman.
-Postman is...
+Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user.
+
+The sign up/sign in and JWT token generation was also tested through the `/dj-rest-auth/registration/` and `dj-rest-auth/login/` routes.
 
 ### Root
 
