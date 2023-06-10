@@ -12,6 +12,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="calendar",
             name="timezone",
-            field=models.CharField(default="2023-05-15T09:43:51+02:00", max_length=255),
+            field=models.CharField(
+                default="2023-05-15T09:43:51+02:00", max_length=255
+            ),
         ),
     ]
