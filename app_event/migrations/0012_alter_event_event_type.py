@@ -4,15 +4,33 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_event', '0011_auto_20230523_0956'),
+        ("app_event", "0011_auto_20230523_0956"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='event_type',
-            field=models.CharField(choices=[('Educational', 'Educational'), ('Cultural', 'Cultural'), ('Recreational', 'Recreational'), ('Fundraiser', 'Fundraiser'), ('Private', 'Private'), ('Work', 'Work'), ('Exhibition', 'Exhibition'), ('Festival', 'Festival'), ('Concert', 'Concert'), ('Cinema', 'Cinema'), ('Party', 'Party'), ('Seminar', 'Seminar'), ('Personal', 'Personal'), ('Other', 'Other')], default='Educational', max_length=100),
+            model_name="event",
+            name="event_type",
+            field=models.CharField(
+                choices=[
+                    ("Educational", "Educational"),
+                    ("Cultural", "Cultural"),
+                    ("Recreational", "Recreational"),
+                    ("Fundraiser", "Fundraiser"),
+                    ("Private", "Private"),
+                    ("Work", "Work"),
+                    ("Exhibition", "Exhibition"),
+                    ("Festival", "Festival"),
+                    ("Concert", "Concert"),
+                    ("Cinema", "Cinema"),
+                    ("Party", "Party"),
+                    ("Seminar", "Seminar"),
+                    ("Personal", "Personal"),
+                    ("Other", "Other"),
+                ],
+                default="Educational",
+                max_length=100,
+            ),
         ),
     ]

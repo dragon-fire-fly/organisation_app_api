@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_memory', '0003_alter_memory_event'),
+        ("app_memory", "0003_alter_memory_event"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='memory',
-            name='plan',
+            model_name="memory",
+            name="plan",
             field=models.BooleanField(default=True),
         ),
     ]

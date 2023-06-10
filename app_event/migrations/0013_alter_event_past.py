@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_event', '0012_alter_event_event_type'),
+        ("app_event", "0012_alter_event_event_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='past',
+            model_name="event",
+            name="past",
             field=models.BooleanField(default=False, null=True),
         ),
     ]

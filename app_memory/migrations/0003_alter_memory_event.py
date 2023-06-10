@@ -5,16 +5,17 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_event', '0012_alter_event_event_type'),
-        ('app_memory', '0002_alter_memory_event'),
+        ("app_event", "0012_alter_event_event_type"),
+        ("app_memory", "0002_alter_memory_event"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='memory',
-            name='event',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_event.event'),
+            model_name="memory",
+            name="event",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="app_event.event"
+            ),
         ),
     ]

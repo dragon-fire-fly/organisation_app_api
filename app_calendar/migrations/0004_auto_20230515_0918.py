@@ -6,22 +6,25 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('app_calendar', '0003_alter_calendar_owner'),
+        ("app_calendar", "0003_alter_calendar_owner"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='calendar',
-            name='timezone',
-            field=models.CharField(default='utc', max_length=255),
+            model_name="calendar",
+            name="timezone",
+            field=models.CharField(default="utc", max_length=255),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='calendar',
-            name='owner',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='calendar', to=settings.AUTH_USER_MODEL),
+            model_name="calendar",
+            name="owner",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="calendar",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
