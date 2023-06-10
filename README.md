@@ -47,6 +47,43 @@ For backend:
 
 ![API ERD](documentation/API_ERD2.png)
 
+### Models
+
+The following models are taken from the Code Institute Moments walkthrough tutorial:
+
+- Post
+- Comment
+- Like
+- Follower
+- Profile
+
+The folowing models are custom:
+
+- Event  
+  This model is based on the `Post` model, but has many additional fields, including the following:
+
+  - ManyToMany field (to calendars)
+  - DateTime field (event start and end)
+  - URL field (for links)
+  - Boolean fields (for all_day, past and notification fields)
+  - Choice fields (for event_type, privacy and time_zone fields)
+
+- Watch  
+  This model is very similar to the "like" model, but for events
+
+- Memory  
+  This model is based on the "comment" model, but has the following additional fields:
+
+  - ImageField (for attaching an image to the memory)
+  - Boolean field (for determining whether a memory is a "plan" or not)
+
+- Calendar  
+  This model has a one-to-one relationship with user so that each user has exactly one calendar. The calendar is created and assigned during user creation such that each calendar has the same pk as the user. This is achieved with the create_calendar function and the post_save method to associate the user.
+
+  The calendar model also has a timezone field. This field retrieves the user's timezone from their IP address using the [timezoneapi.io](https://timezoneapi.io) API with a token stored in the application's hidden variables. If the user's ip address cannot be determined in this way, the default value of "UTC" is used.
+
+  This is part of a future feature concerned with connecting the application to the Google Calendar API. When creating events, it is crucial that the correct timezone is used, otherwise the event time will inaccurate and any reminders set up will display at the wrong point. Unfotunately, this feature is not yet implemented in the frontend of the application.
+
 ## Features
 
 Below are all of the valid endpoints for the API, seperated into their respective apps. There are 9 apps in total that each have a set of API endpoints which can be accessed at the URIs listed below.
@@ -227,6 +264,10 @@ If the route for a non existant post is entered, a 404 error is returned
 ![calendar detail route](documentation/features/calendar_detail.png)
 
 </details>
+
+### Future Features
+
+Connect to the Google Calendar API
 
 ## Testing
 
