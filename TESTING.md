@@ -162,13 +162,12 @@ To access restricted content using Postman, the JWT token must be supplied in th
 
 ### Followers
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                                               |
-| ------ | ------- | -------------------------------- | -------- | -------------------------------------------------------- |
-| GET    | //      | list view                        | 200      | ![get list view](documentation/testing/postman)          |
-| POST   | //      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman)   |
-| POST   | //      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman)     |
-| GET    | //{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman)        |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman)    |
-| PUT    | //{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman)      |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman)   |
+| HTTP   | URI              | Testing                            | Response | Screenshot                                                                                   |
+| ------ | ---------------- | ---------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| GET    | /followers/      | list view                          | 200      | ![get list view](documentation/testing/postman/followers-get-success.png)                    |
+| POST   | /followers/      | post with unauthenticated          | 401      | ![unauthenticated post](documentation/testing/postman/follower-post-unauthenticated.png)     |
+| POST   | /followers/      | post with authenticated user       | 201      | ![authenticated post](documentation/testing/postman/follower-post-success.png)               |
+| GET    | /followers/{id}/ | detail view                        | 200      | ![get detail view](documentation/testing/postman/follower-get-success.png)                   |
+| DELETE | /followers/{id}/ | delete with unauthenticated user   | 401      | ![unauthenticated delete](documentation/testing/postman/follower-delete-unauthenticated.png) |
+| DELETE | /followers/{id}/ | delete with valid user (not owner) | 403      | ![no permission delete](documentation/testing/postman/follower-delete-no-permission.png)     |
+| DELETE | /followers/{id}/ | delete with valid user (owner)     | 204      | ![authenticated delete](documentation/testing/postman/follower-delete-success.png)           |
