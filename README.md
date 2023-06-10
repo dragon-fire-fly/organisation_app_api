@@ -271,30 +271,7 @@ Connect to the Google Calendar API
 
 ## Testing
 
-### Ci Workflow
-
-A Continuous Integration (CI) workflow was set up on Github actions to monitor the API and run all unittests after each commit.
-This enabled early detection of test failures and therefore faster fixture of bugs.
-
-The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob/main/.github/workflows/ci.yml) can be found in the github repository for the project.
-
-### PEP8
-
-All files in the project have been run through the internal pycodestyle linter in VSCode during development.
-In addition, the [Black](https://pypi.org/project/black/) pep8 validation tool was used on all files, installed into my VSCode environment throughout the development of the project. The line-length setting for Black was amended to 79 instead of the default 108 to comply with best practices.
-
-To install and run pycode style:
-
-- Run the command 'pip3 install -r requirements.txt'
-- Press Ctrl+Shift+P
-- Type 'linter' into the search field
-- Select 'Python: Select Linter
-- Select 'pycodestyle' from the list
-- Select the 'Problems' tab in the terminal area at the bottom of the screen
-- PEP8 errors are now displayed in the "problems"tab as well as being underlined in red in files themselves
-
-![pycodestyle no errors](documentation/testing/no_problems_pycodestyle.png)
-![Black PEP8 check](documentation/testing/black-pep8-linting.png)
+[Testing documentation can be found in the TESTING.md file](TESTING.md)
 
 ## Deployment
 
