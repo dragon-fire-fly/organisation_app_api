@@ -4,5 +4,4 @@ from . import views
 urlpatterns = [
     path("calendars/", views.CalendarList.as_view()),
     path("calendars/<int:pk>/", views.CalendarDetail.as_view()),
-    path("calendars/<int:pk>/create/", views.CalendarCreateEvent.as_view()),
 ]
