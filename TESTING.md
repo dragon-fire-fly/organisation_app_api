@@ -40,19 +40,19 @@ Postman is...
 
 | HTTP | URI                        | Testing                      | Response               | Screenshot                                                                         |
 | ---- | -------------------------- | ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
-| GET  | dj-rest-auth/registration/ | not allowed                  | 405 method not allowed | ![get route not allowed](documentation/testing/postman/signup-get-not-allowed.png) |
+| GET  | dj-rest-auth/registration/ | get method not allowed       | 405 method not allowed | ![get route not allowed](documentation/testing/postman/signup-get-not-allowed.png) |
 | POST | dj-rest-auth/registration/ | blank username & password    | 400 bad request        | ![blank username and password](documentation/testing/postman/signup-blank.png)     |
 | POST | dj-rest-auth/registration/ | password too short           | 400 bad request        | ![password too short](documentation/testing/postman/signup-pw-too-short.png)       |
 | POST | dj-rest-auth/registration/ | non matching password        | 400 bad request        | ![non matching password](documentation/testing/postman/signup-pw-nomatch.png)      |
 | POST | dj-rest-auth/registration/ | password similar to username | 400 bad request        | ![password too similar](documentation/testing/postman/signup-pw-too-similar.png)   |
 | POST | dj-rest-auth/registration/ | password too common          | 400 bad request        | ![password too common](documentation/testing/postman/signup-pw-too-common.png)     |
-| POST | dj-rest-auth/registration/ | valid username & password    | 200 success            | ![successful signup](documentation/testing/postman/signup-success.png)             |
+| POST | dj-rest-auth/registration/ | valid username & password    | 201 created            | ![successful signup](documentation/testing/postman/signup-success.png)             |
 
 ### Sign in
 
 | HTTP | URI                 | Testing                   | Response               | Screenshot                                                                         |
 | ---- | ------------------- | ------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
-| GET  | dj-rest-auth/login/ | not allowed               | 405 method not allowed | ![get route not allowed](documentation/testing/postman/signin-get-not-allowed.png) |
+| GET  | dj-rest-auth/login/ | get method not allowed    | 405 method not allowed | ![get route not allowed](documentation/testing/postman/signin-get-not-allowed.png) |
 | POST | dj-rest-auth/login/ | blank username & password | 400 bad request        | ![blank username and password](documentation/testing/postman/signin-blank.png)     |
 | POST | dj-rest-auth/login/ | valid username & password | 200 success            | ![successful login](documentation/testing/postman/signin-success.png)              |
 
@@ -64,17 +64,16 @@ To access restricted content using Postman, the JWT token must be supplied in th
 | HTTP | URI             | Testing                       | Response               | Screenshot                                                                            |
 | ---- | --------------- | ----------------------------- | ---------------------- | ------------------------------------------------------------------------------------- |
 | GET  | /profiles/      | list view                     | 200 success            | ![profiles list](documentation/testing/postman/profiles.png)                          |
-| POST | /profiles/      | method not allowed            | 405 method not allowed | ![post not allowed](documentation/testing/postman/profiles-post-not-allowed.png)      |
-| GET  | /profiles/{id}/ | detail view                   |                        | ![profile detail view](documentation/testing/postman/profile.png)                     |
-| PUT  | /profiles/{id}/ | put with unauthenticated user |                        | ![unauthenticated put](documentation/testing/postman/profile-put-unauthenticated.png) |
-| PUT  | /profiles/{id}/ | put with validated user       |                        | ![authenticated put](documentation/testing/postman)                                   |
+| POST | /profiles/      | post method not allowed       | 405 method not allowed | ![post not allowed](documentation/testing/postman/profiles-post-not-allowed.png)      |
+| GET  | /profiles/{id}/ | detail view                   | 200 success            | ![profile detail view](documentation/testing/postman/profile.png)                     |
+| PUT  | /profiles/{id}/ | put with unauthenticated user | 401 unauthorized       | ![unauthenticated put](documentation/testing/postman/profile-put-unauthenticated.png) |
 
 ### Posts
 
 | HTTP   | URI               | Testing                                 | Response               | Screenshot                                                                             |
 | ------ | ----------------- | --------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------- |
 | GET    | /posts/           | list view                               | 200 success            | ![get list view](documentation/testing/postman/posts-get-success.png)                  |
-| POST   | /posts/           | method not allowed                      | 405 method not allowed | ![post not allowed](documentation/testing/postman/posts-post-not-allowed.png)          |
+| POST   | /posts/           | post method not allowed                 | 405 method not allowed | ![post not allowed](documentation/testing/postman/posts-post-not-allowed.png)          |
 | POST   | /posts/create/    | unauthenticated user not able to post   | 401 unauthorized       | ![unauthenticated post](documentation/testing/postman/create-post-unauthenticated.png) |
 | POST   | /posts/create/    | authenticated user able to post         | 201 created            | ![authenticated post](documentation/testing/postman/create-post-success.png)           |
 | GET    | /posts/{id}/      | detail view                             | 200 success            | ![get detail view](documentation/testing/postman/post-detail-get.png)                  |
@@ -83,22 +82,22 @@ To access restricted content using Postman, the JWT token must be supplied in th
 | PUT    | /posts/{id}/edit/ | put with valid user (post owner)        | 200 success            | ![authenticated put](documentation/testing/postman/post-put-success.png)               |
 | DELETE | /posts/{id}/edit/ | delete with unauthenticated user        | 401 unauthorized       | ![unauthenticated delete](documentation/testing/postman/post-delete-unauthorised.png)  |
 | DELETE | /posts/{id}/edit/ | delete with valid user (not post owner) | 403 forbidden          | ![authenticated delete](documentation/testing/postman/post-delete-no-permission.png)   |
-| DELETE | /posts/{id}/edit/ | delete with valid user ([post owner])   | 204 no content         | ![authenticated delete](documentation/testing/postman/post-delete-success.png)         |
+| DELETE | /posts/{id}/edit/ | delete with valid user (post owner)     | 204 no content         | ![authenticated delete](documentation/testing/postman/post-delete-success.png)         |
 
 ### Events
 
-| HTTP   | URI           | Testing                                       | Response         | Screenshot                                                                             |
-| ------ | ------------- | --------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------- |
-| GET    | /events/      | list view                                     | 200 success      | ![get list view](documentation/testing/postman/events-get-success.png)                 |
-| POST   | /events/      | post with unauthenticated user                | 401 unauthorized | ![unauthenticated post](documentation/testing/postman/event-post-unauthorised.png)     |
-| POST   | /events/      | post with authenticated user                  | 201 created      | ![authenticated post](documentation/testing/postman/event-post-success.png)            |
-| GET    | /events/{id}/ | detail view                                   | 200 success      | ![get detail view](documentation/testing/postman/event-get-success.png)                |
-| PUT    | /events/{id}/ | put with unauthenticated user                 | 401 unauthorized | ![unauthenticated put](documentation/testing/postman/event-put-unauthorised.png)       |
-| PUT    | /events/{id}/ | put with valid user (not event owner)         | 403 forbidden    | ![no permission put](documentation/testing/postman/event-put-no-permission.png)        |
-| PUT    | /events/{id}/ | put with valid user (event owner)             | 200 success      | ![authenticated put](documentation/testing/postman/event-put-success.png)              |
-| DELETE | /posts/{id}/  | delete with unauthenticated user              | 401 unauthorized | ![unauthenticated delete](documentation/testing/postman/event-delete-unauthorised.png) |
-| DELETE | /posts/{id}/  | delete with valid user (not event owner) \*\* | 403 forbidden    | ![no permission delete](documentation/testing/postman)                                 |
-| DELETE | /posts/{id}/  | delete with valid user (event owner)          | 204 no content   | ![authenticated delete](documentation/testing/postman/event-delete-success.png)        |
+| HTTP   | URI           | Testing                                  | Response         | Screenshot                                                                             |
+| ------ | ------------- | ---------------------------------------- | ---------------- | -------------------------------------------------------------------------------------- |
+| GET    | /events/      | list view                                | 200 success      | ![get list view](documentation/testing/postman/events-get-success.png)                 |
+| POST   | /events/      | post with unauthenticated user           | 401 unauthorized | ![unauthenticated post](documentation/testing/postman/event-post-unauthorised.png)     |
+| POST   | /events/      | post with authenticated user             | 201 created      | ![authenticated post](documentation/testing/postman/event-post-success.png)            |
+| GET    | /events/{id}/ | detail view                              | 200 success      | ![get detail view](documentation/testing/postman/event-get-success.png)                |
+| PUT    | /events/{id}/ | put with unauthenticated user            | 401 unauthorized | ![unauthenticated put](documentation/testing/postman/event-put-unauthorised.png)       |
+| PUT    | /events/{id}/ | put with valid user (not event owner)    | 403 forbidden    | ![no permission put](documentation/testing/postman/event-put-no-permission.png)        |
+| PUT    | /events/{id}/ | put with valid user (event owner)        | 200 success      | ![authenticated put](documentation/testing/postman/event-put-success.png)              |
+| DELETE | /events/{id}/ | delete with unauthenticated user         | 401 unauthorized | ![unauthenticated delete](documentation/testing/postman/event-delete-unauthorised.png) |
+| DELETE | /events/{id}/ | delete with valid user (not event owner) | 403 forbidden    | ![no permission delete](documentation/testing/postman/event-delete-no-permission.png)  |
+| DELETE | /events/{id}/ | delete with valid user (event owner)     | 204 no content   | ![authenticated delete](documentation/testing/postman/event-delete-success.png)        |
 
 ### Calendars
 
@@ -106,7 +105,7 @@ To access restricted content using Postman, the JWT token must be supplied in th
 | ------ | ---------------- | ------------------ | ---------------------- | --------------------------------------------------------------------------------- |
 | GET    | /calendars/      | list view          | 200 success            | ![get list view](documentation/testing/postman/calendars-get-success.png)         |
 | GET    | /calendars/{id}/ | detail view        | 200 success            | ![get detail view](documentation/testing/postman/calendar-get-success.png)        |
-| DE:ETE | /calendars/{id}/ | delete not allowed | 405 method not allowed | ![get detail view](documentation/testing/postman/calendar-delete-not-allowed.png) |
+| DELETE | /calendars/{id}/ | delete not allowed | 405 method not allowed | ![get detail view](documentation/testing/postman/calendar-delete-not-allowed.png) |
 
 ### Comments
 
