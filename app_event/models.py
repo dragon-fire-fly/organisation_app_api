@@ -13,7 +13,7 @@ TIME_ZONE_TOKEN = os.environ.get("TIME_ZONE_TOKEN")
 try:
     # response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
     data = response.json()
-    timezone = data['data']['timezone']['id']
+    timezone = data["data"]["timezone"]["id"]
 except:
     timezone = "UTC"
 
@@ -60,7 +60,9 @@ class Event(models.Model):
         upload_to="images/", default="../sd2as2klixs1ijw9022d", blank=True
     )
     link = models.URLField(null=True, blank=True)
-    event_type = models.CharField(max_length=100, choices=EVENT_TYPES, default="Educational")
+    event_type = models.CharField(
+        max_length=100, choices=EVENT_TYPES, default="Educational"
+    )
     location = models.CharField(max_length=255)
     start = models.DateTimeField(null=True)
     end = models.DateTimeField(null=True)
@@ -69,8 +71,9 @@ class Event(models.Model):
     past = models.BooleanField(default=False, null=True)
     notification = models.BooleanField(default=False)
     calendars = models.ManyToManyField(Calendar, related_name="events")
-    timezone = models.CharField(max_length=255, choices=TIMEZONES, default="UTC")
+    timezone = models.CharField(
+        max_length=255, choices=TIMEZONES, default="UTC"
+    )
 
     def get_calendars(self):
         calendars = Calendar.objects.filter(pk=self.owner)
-    

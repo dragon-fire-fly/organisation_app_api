@@ -22,7 +22,7 @@ if os.path.exists("env.py"):
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
-    'corsheaders',
+    "corsheaders",
     "app_profile",
     "app_event",
     "app_post",
@@ -75,7 +75,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -96,11 +96,11 @@ if os.getenv("GITHUB_WORKFLOW"):
     CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 else:
     CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN'),
+        os.environ.get("CLIENT_ORIGIN"),
     ]
 
 CSRF_TRUSTED_ORIGINS = [
-    os.environ.get('CLIENT_ORIGIN'),
+    os.environ.get("CLIENT_ORIGIN"),
 ]
 
 ROOT_URLCONF = "organisation_app.urls"
@@ -131,25 +131,23 @@ if os.getenv("GITHUB_WORKFLOW"):
     # check if in GITHUB ACTION MODE
     DATABASES = {
         "default": {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-            }
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
 else:
     # check if unittest running locally
     if "test" in sys.argv[0] or "test" in sys.argv[1]:
         DATABASES = {
             "default": {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": BASE_DIR / "db.sqlite3",
             }
         }
     else:
         DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get('DATABASE_URL')
-    )}
-
+            "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        }
 
 
 # Password validation
@@ -195,7 +193,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 REST_FRAMEWORK = {
-        "DEFAULT_AUTHENTICATION_CLASSES": [
+    "DEFAULT_AUTHENTICATION_CLASSES": [
         (
             "rest_framework.authentication.SessionAuthentication"
             if "test" in sys.argv[0] or "test" in sys.argv[1]
@@ -212,7 +210,7 @@ REST_USE_JWT = True  # enables JWT token usage
 JWT_AUTH_SECURE = True  # ensures tokens send over HTTPS only
 JWT_AUTH_COOKIE = "my-app-auth"  # access token
 JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"  # refresh token
-JWT_AUTH_SAMESITE = 'None'
+JWT_AUTH_SAMESITE = "None"
 
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "organisation_app.serializers.CurrentUserSerializer"
@@ -227,4 +225,4 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = "none"

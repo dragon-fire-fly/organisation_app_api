@@ -16,8 +16,8 @@ class EventList(generics.ListCreateAPIView):
     serializer_class = EventSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Event.objects.annotate(
-        watches_count=Count('watches', distinct=True),
-        memories_count=Count("memory", distinct=True)
+        watches_count=Count("watches", distinct=True),
+        memories_count=Count("memory", distinct=True),
     ).order_by("-created_at")
     filter_backends = [
         filters.OrderingFilter,
@@ -25,9 +25,9 @@ class EventList(generics.ListCreateAPIView):
         DjangoFilterBackend,
     ]
     filterset_fields = [
-        'owner__followed__owner__profile',
-        'watches__owner__profile',
-        'owner__profile',
+        "owner__followed__owner__profile",
+        "watches__owner__profile",
+        "owner__profile",
     ]
     search_fields = [
         "owner__username",
@@ -39,10 +39,11 @@ class EventList(generics.ListCreateAPIView):
         "end",
     ]
     ordering_fields = [
-        'watches_count',
-        'watches__created_at',
-        'memories_count',
+        "watches_count",
+        "watches__created_at",
+        "memories_count",
     ]
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -53,9 +54,9 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     """
 
     queryset = Event.objects.annotate(
-        watches_count=Count('watches', distinct=True),
-        memories_count=Count('memory', distinct=True)
-    ).order_by('-created_at')
+        watches_count=Count("watches", distinct=True),
+        memories_count=Count("memory", distinct=True),
+    ).order_by("-created_at")
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = EventSerializer
 
@@ -65,10 +66,12 @@ class CustomEventPagination(PageNumberPagination):
     page_size_query_param = "page_size"
     max_page_size = 1000
 
+
 class CalendarEvents(generics.ListAPIView):
     """
     Retrieves events from the calendar of the logged in user.
     """
+
     pagination_class = CustomEventPagination
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
@@ -84,10 +87,10 @@ class CalendarEvents(generics.ListAPIView):
     search_fields = [
         "title",
     ]
-    ordering_fields = [
-        'start'
-    ]
+    ordering_fields = ["start"]
 
     def get_queryset(self):
-        queryset = Event.objects.filter(calendars=self.kwargs["pk"]).order_by('start')
+        queryset = Event.objects.filter(calendars=self.kwargs["pk"]).order_by(
+            "start"
+        )
         return queryset

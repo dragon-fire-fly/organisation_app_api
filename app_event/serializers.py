@@ -8,6 +8,7 @@ from app_memory.serializers import MemorySerializer
 from datetime import datetime
 import pytz
 
+
 class EventTimesValidator:
     """
     Compares the starting time and ending time of an event and raises
@@ -17,6 +18,7 @@ class EventTimesValidator:
     def validate_event_times(self, start, end):
         if start and end and end < start:
             raise ValidationError("An event cannot end before it has started!")
+
 
 class EventSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
@@ -41,11 +43,9 @@ class EventSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def get_watch_id(self, obj):
-        user = self.context['request'].user
+        user = self.context["request"].user
         if user.is_authenticated:
-            watch = Watch.objects.filter(
-                owner=user, event=obj
-            ).first()
+            watch = Watch.objects.filter(owner=user, event=obj).first()
             return watch.id if watch else None
         return None
 
@@ -64,7 +64,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data["calendars"] = [validated_data["owner"].pk]
-        many_to_many_data = validated_data.pop('calendars', None)
+        many_to_many_data = validated_data.pop("calendars", None)
         instance = super().create(validated_data)
 
         if many_to_many_data is not None:
@@ -74,14 +74,14 @@ class EventSerializer(serializers.ModelSerializer):
 
     def validate_image(self, value):
         if value.size > 4 * 1024 * 1024:
-            raise serializers.ValidationError('Image size larger than 4MB!')
+            raise serializers.ValidationError("Image size larger than 4MB!")
         if value.image.height > 4096:
             raise serializers.ValidationError(
-                'Image height larger than 4096px!'
+                "Image height larger than 4096px!"
             )
         if value.image.width > 4096:
             raise serializers.ValidationError(
-                'Image width larger than 4096px!'
+                "Image width larger than 4096px!"
             )
         return value
 
@@ -116,6 +116,7 @@ class EventSerializer(serializers.ModelSerializer):
 class CalendarEventSerializer(EventSerializer):
     start = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     end = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+
     class Meta:
         model = Event
         fields = [
@@ -138,5 +139,5 @@ class CalendarEventSerializer(EventSerializer):
             "watch_id",
             "watches_count",
             "memories_count",
-            "calendars"
+            "calendars",
         ]

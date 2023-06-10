@@ -67,6 +67,7 @@ class PostDetail(generics.RetrieveAPIView):
         likes_count=Count("likes", distinct=True),
     ).order_by("-created_at")
 
+
 class UpdatePost(generics.RetrieveUpdateDestroyAPIView):
     """
     Edit or delete it if you own it.

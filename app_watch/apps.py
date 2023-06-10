@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AppWatchConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app_watch'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "app_watch"

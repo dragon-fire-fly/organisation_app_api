@@ -2,6 +2,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from .models import Memory
 
+
 class MemorySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
@@ -21,7 +22,7 @@ class MemorySerializer(serializers.ModelSerializer):
     def get_updated_at(self, obj):
         return naturaltime(obj.updated_at)
 
-    def get_plan(self,obj):
+    def get_plan(self, obj):
         if (obj.event.start - obj.created_at).days < 0:
             plan = False
         else:

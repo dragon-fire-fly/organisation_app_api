@@ -12,9 +12,9 @@ if os.path.exists("env.py"):
 # API request for timezone info
 TIME_ZONE_TOKEN = os.environ.get("TIME_ZONE_TOKEN")
 try:
-    response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
+    # response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
     data = response.json()
-    timezone = data['data']['timezone']['id']
+    timezone = data["data"]["timezone"]["id"]
 except:
     timezone = "UTC"
 
@@ -24,6 +24,9 @@ class Calendar(models.Model):
         User, related_name="calendar", on_delete=models.CASCADE
     )
     timezone = models.CharField(max_length=255, default=timezone)
+
+    def __str__(self):
+        return f"{self.owner}'s calendar"
 
 
 def create_calendar(sender, instance, created, **kwargs):

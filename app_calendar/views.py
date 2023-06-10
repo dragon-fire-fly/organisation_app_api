@@ -21,17 +21,8 @@ class CalendarList(generics.ListAPIView):
     ]
     filterset_fields = [
         # 'likes__owner__profile',
-        'owner__calendar',
+        "owner__calendar",
     ]
-
-
-class CalendarCreateEvent(generics.CreateAPIView):
-    """
-    Add an event to a calendar
-    """
-
-    queryset = Calendar.objects.all()
-    serializer_class = CalendarSerializer
 
 
 class CalendarDetail(generics.RetrieveUpdateAPIView):
