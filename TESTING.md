@@ -57,7 +57,8 @@ These routes address the following user stories:
 ### Sign in
 
 These routes address the following user stories:
-As a **registered user** I can **log in to my account** so that **I can have full access to the site, make, comment on and like posts and events**
+
+- As a **registered user** I can **log in to my account** so that **I can have full access to the site, make, comment on and like posts and events**
 
 | HTTP | URI                 | Testing                   | Response               | Screenshot                                                                         |
 | ---- | ------------------- | ------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |

@@ -15,31 +15,11 @@ Link to the front-end repository - [EventTrove Back-End Repo](https://github.com
 
 ## User Stories
 
-For backend:
+All user stories can be found in the [User Story grid](https://docs.google.com/spreadsheets/d/1-8NA5gjndIE3oYSuDAwsheJqryA4tlZQ6CmLRp4fKt8/edit?usp=sharing)
 
-| Category             | as a    | I want to                      | so that I can                                                                                                 | mapping API feature |
-| -------------------- | ------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------- |
-| Account registration | visitor | register for an account        | have a user profile with picture and have full access to the site, make, comment on and like posts and events |                     |
-| Posts                | visitor | view a list of posts           | view recent uploads and decide if I want to sign up                                                           |                     |
-|                      | visitor | view individual posts          | read the post in more detail and see the associated comments                                                  |                     |
-|                      | user    | create new posts               |                                                                                                               |                     |
-|                      | user    | edit and delete my own posts   |                                                                                                               |                     |
-|                      | user    | like other user's posts        |                                                                                                               |                     |
-|                      | user    | unlike other user's posts      |                                                                                                               |                     |
-|                      | user    | comment on other user's posts  |                                                                                                               |                     |
-|                      | user    | edit and delete my comments    |                                                                                                               |                     |
-|                      | user    |                                |                                                                                                               |                     |
-|                      | user    |                                |                                                                                                               |                     |
-| Events               | visitor | view public events             | see what events are planned and see if I would like to create an account to add the event(s) to my calendar   |                     |
-|                      | visitor | view individual events         | see more detail about the event and see any associated comments                                               |                     |
-|                      | user    | create new events              |                                                                                                               |                     |
-|                      | user    | edit and delete my own events  |                                                                                                               |                     |
-|                      | user    | like other user's events       |                                                                                                               |                     |
-|                      | user    | comment on other user's events |                                                                                                               |                     |
-|                      | user    | add events to my calendar      |                                                                                                               |                     |
-|                      | user    | remove events from my calendar |                                                                                                               |                     |
-|                      | user    |                                |                                                                                                               |                     |
-|                      | user    |                                |                                                                                                               |                     |
+Each user story has details of it's EPIC, the user story number, the title, user story, acceptance criteria and both the backend and frontend tasks (with link to backend and frontend issues).
+
+User story testing may be found in the [Testing documentation](TESTING.md)
 
 ## Database Design
 
@@ -414,10 +394,7 @@ You can fork this repository by using the following steps:
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
-### Security
-
 ## References
 
 Creating events in google calendar: https://developers.google.com/calendar/api/guides/create-events
-
 for obtaining user's timezone: https://www.youtube.com/watch?v=lUe_-WnrPUE
