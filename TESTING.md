@@ -59,115 +59,108 @@ To access restricted content using Postman, the JWT token must be supplied in th
 
 ### Profiles
 
-| HTTP | URI             | Testing                       | Response | Screenshot                                                         |
-| ---- | --------------- | ----------------------------- | -------- | ------------------------------------------------------------------ |
-| GET  | /profiles/      | list view                     | 200      | ![](documentation/testing/postman/profiles.png)                    |
-| POST | /profiles/      | method not allowed            | 405      | ![](documentation/testing/postman/profiles-post-not-allowed.png)   |
-| GET  | /profiles/{id}/ | detail view                   |          | ![](documentation/testing/postman/profile.png)                     |
-| PUT  | /profiles/{id}/ | put with unauthenticated user |          | ![](documentation/testing/postman/profile-put-unauthenticated.png) |
-| PUT  | /profiles/{id}/ | put with validated user       |          | ![](documentation/testing/postman)                                 |
+| HTTP | URI             | Testing                       | Response | Screenshot                                                                            |
+| ---- | --------------- | ----------------------------- | -------- | ------------------------------------------------------------------------------------- |
+| GET  | /profiles/      | list view                     | 200      | ![profiles list](documentation/testing/postman/profiles.png)                          |
+| POST | /profiles/      | method not allowed            | 405      | ![post not allowed](documentation/testing/postman/profiles-post-not-allowed.png)      |
+| GET  | /profiles/{id}/ | detail view                   |          | ![profile detail view](documentation/testing/postman/profile.png)                     |
+| PUT  | /profiles/{id}/ | put with unauthenticated user |          | ![unauthenticated put](documentation/testing/postman/profile-put-unauthenticated.png) |
+| PUT  | /profiles/{id}/ | put with validated user       |          | ![authenticated put](documentation/testing/postman)                                   |
 
 ### Posts
 
-| HTTP   | URI               | Testing                               | Response | Screenshot                                                         |
-| ------ | ----------------- | ------------------------------------- | -------- | ------------------------------------------------------------------ |
-| GET    | /posts/           | list view                             | 200      | ![](documentation/testing/postman/posts-get-success.png)           |
-| POST   | /posts/           | method not allowed                    | 405      | ![](documentation/testing/postman/posts-post-not-allowed.png)      |
-| POST   | /posts/create/    | unauthenticated user not able to post | 401      | ![](documentation/testing/postman/create-post-unauthenticated.png) |
-| POST   | /posts/create/    | authenticated user able to post       | 201      | ![](documentation/testing/postman/create-post-success.png)         |
-| GET    | /posts/{id}/      | detail view                           | 200      | ![](documentation/testing/postman/post-detail-get.png)             |
-| PUT    | /posts/{id}/edit/ | put with unauthenticated user         | 401      | ![](documentation/testing/postman/post-put-unauthenticated.png)    |
-| PUT    | /posts/{id}/edit/ | put with valid user                   | 200      | ![](documentation/testing/postman/post-put-success.png)            |
-| DELETE | /posts/{id}/edit/ | delete with unauthenticated user      | 401      | ![](documentation/testing/postman/post-delete-unauthorised.png)    |
-| DELETE | /posts/{id}/edit/ | delete with valid user                | 204      | ![](documentation/testing/postman/post-delete-success.png)         |
+| HTTP   | URI               | Testing                               | Response | Screenshot                                                                             |
+| ------ | ----------------- | ------------------------------------- | -------- | -------------------------------------------------------------------------------------- |
+| GET    | /posts/           | list view                             | 200      | ![get list view](documentation/testing/postman/posts-get-success.png)                  |
+| POST   | /posts/           | method not allowed                    | 405      | ![post not allowed](documentation/testing/postman/posts-post-not-allowed.png)          |
+| POST   | /posts/create/    | unauthenticated user not able to post | 401      | ![unauthenticated post](documentation/testing/postman/create-post-unauthenticated.png) |
+| POST   | /posts/create/    | authenticated user able to post       | 201      | ![authenticated post](documentation/testing/postman/create-post-success.png)           |
+| GET    | /posts/{id}/      | detail view                           | 200      | ![get detail view](documentation/testing/postman/post-detail-get.png)                  |
+| PUT    | /posts/{id}/edit/ | put with unauthenticated user         | 401      | ![unauthenticated put](documentation/testing/postman/post-put-unauthenticated.png)     |
+| PUT    | /posts/{id}/edit/ | put with valid user                   | 200      | ![authenticated put](documentation/testing/postman/post-put-success.png)               |
+| DELETE | /posts/{id}/edit/ | delete with unauthenticated user      | 401      | ![unauthenticated delete](documentation/testing/postman/post-delete-unauthorised.png)  |
+| DELETE | /posts/{id}/edit/ | delete with valid user                | 204      | ![authenticated delete](documentation/testing/postman/post-delete-success.png)         |
 
 ### Events
 
-| HTTP   | URI           | Testing                          | Response | Screenshot                                                       |
-| ------ | ------------- | -------------------------------- | -------- | ---------------------------------------------------------------- |
-| GET    | /events/      | list view                        | 200      | ![](documentation/testing/postman/events-get-success.png)        |
-| POST   | /events/      | post with unauthenticated user   | 401      | ![](documentation/testing/postman/event-post-unauthorised.png)   |
-| POST   | /events/      | post with authenticated user     | 201      | ![](documentation/testing/postman/event-post-success.png)        |
-| GET    | /events/{id}/ | detail view                      | 200      | ![](documentation/testing/postman/event-get-success.png)         |
-| PUT    | /events/{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman/event-put-unauthorised.png)    |
-| PUT    | /events/{id}/ | put with valid user              | 200      | ![](documentation/testing/postman/event-put-success.png)         |
-| DELETE | /posts/{id}/  | delete with unauthenticated user | 401      | ![](documentation/testing/postman/event-delete-unauthorised.png) |
-| DELETE | /posts/{id}/  | delete with valid user           | 204      | ![](documentation/testing/postman/event-delete-success.png)      |
+| HTTP   | URI           | Testing                          | Response | Screenshot                                                                             |
+| ------ | ------------- | -------------------------------- | -------- | -------------------------------------------------------------------------------------- |
+| GET    | /events/      | list view                        | 200      | ![get list view](documentation/testing/postman/events-get-success.png)                 |
+| POST   | /events/      | post with unauthenticated user   | 401      | ![unauthenticated post](documentation/testing/postman/event-post-unauthorised.png)     |
+| POST   | /events/      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman/event-post-success.png)            |
+| GET    | /events/{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman/event-get-success.png)                |
+| PUT    | /events/{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman/event-put-unauthorised.png)       |
+| PUT    | /events/{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman/event-put-success.png)              |
+| DELETE | /posts/{id}/  | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman/event-delete-unauthorised.png) |
+| DELETE | /posts/{id}/  | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman/event-delete-success.png)        |
 
 ### Calendars
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI              | Testing            | Response | Screenshot                                                                        |
+| ------ | ---------------- | ------------------ | -------- | --------------------------------------------------------------------------------- |
+| GET    | /calendars/      | list view          | 200      | ![get list view](documentation/testing/postman/calendars-get-success.png)         |
+| GET    | /calendars/{id}/ | detail view        | 200      | ![get detail view](documentation/testing/postman/calendar-get-success.png)        |
+| DE:ETE | /calendars/{id}/ | delete not allowed | 405      | ![get detail view](documentation/testing/postman/calendar-delete-not-allowed.png) |
 
 ### Comments
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI             | Testing                          | Response | Screenshot                                                                               |
+| ------ | --------------- | -------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| GET    | /comments/      | list view                        | 200      | ![get list view](documentation/testing/postman/comments-get-success.png)                 |
+| POST   | /comments/      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman/comment-post-unauthenticated.png)  |
+| POST   | /comments/      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman/comment-post-success.png)            |
+| GET    | /comments/{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman/comment-get-success.png)                |
+| PUT    | /comments/{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman/comment-put-unauthenticated.png)    |
+| PUT    | /comments/{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman/comment-put-success.png)              |
+| DELETE | /comments/{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman/comment-delete-unauthorised.png) |
+| DELETE | /comments/{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman/comment-delete-success.png)        |
 
 ### Likes
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI          | Testing                          | Response | Screenshot                                                                            |
+| ------ | ------------ | -------------------------------- | -------- | ------------------------------------------------------------------------------------- |
+| GET    | /likes/      | list view                        | 200      | ![get list view](documentation/testing/postman/likes-get-success.png)                 |
+| POST   | /likes/      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman/likes-post-unauthenticated.png) |
+| POST   | /likes/      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman/like-post-success.png)            |
+| GET    | /likes/{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman/like-get-success.png)                |
+| DELETE | /likes/{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman/like-delete-unauthorised.png) |
+| DELETE | /likes/{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman/like-delete-success.png)        |
 
 ### Memories
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI             | Testing                          | Response | Screenshot                                               |
+| ------ | --------------- | -------------------------------- | -------- | -------------------------------------------------------- |
+| GET    | /memories/      | list view                        | 200      | ![get list view](documentation/testing/postman)          |
+| POST   | /memories/      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman)   |
+| POST   | /memories/      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman)     |
+| GET    | /memories/{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman)        |
+| PUT    | /memories/{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman)    |
+| PUT    | /memories/{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman)      |
+| DELETE | /memories/{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman) |
+| DELETE | /memories/{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman)   |
 
 ### Watches
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI     | Testing                          | Response | Screenshot                                               |
+| ------ | ------- | -------------------------------- | -------- | -------------------------------------------------------- |
+| GET    | //      | list view                        | 200      | ![get list view](documentation/testing/postman)          |
+| POST   | //      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman)   |
+| POST   | //      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman)     |
+| GET    | //{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman)        |
+| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman)    |
+| PUT    | //{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman)      |
+| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman) |
+| DELETE | //{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman)   |
 
 ### Followers
 
-| HTTP   | URI     | Testing                          | Response | Screenshot                         |
-| ------ | ------- | -------------------------------- | -------- | ---------------------------------- |
-| GET    | //      | list view                        | 200      | ![](documentation/testing/postman) |
-| POST   | //      | post with unauthenticated        | 401      | ![](documentation/testing/postman) |
-| POST   | //      | post with authenticated user     | 201      | ![](documentation/testing/postman) |
-| GET    | //{id}/ | detail view                      | 200      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![](documentation/testing/postman) |
-| PUT    | //{id}/ | put with valid user              | 200      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![](documentation/testing/postman) |
-| DELETE | //{id}/ | delete with valid user           | 204      | ![](documentation/testing/postman) |
+| HTTP   | URI     | Testing                          | Response | Screenshot                                               |
+| ------ | ------- | -------------------------------- | -------- | -------------------------------------------------------- |
+| GET    | //      | list view                        | 200      | ![get list view](documentation/testing/postman)          |
+| POST   | //      | post with unauthenticated        | 401      | ![unauthenticated post](documentation/testing/postman)   |
+| POST   | //      | post with authenticated user     | 201      | ![authenticated post](documentation/testing/postman)     |
+| GET    | //{id}/ | detail view                      | 200      | ![get detail view](documentation/testing/postman)        |
+| PUT    | //{id}/ | put with unauthenticated user    | 401      | ![unauthenticated put](documentation/testing/postman)    |
+| PUT    | //{id}/ | put with valid user              | 200      | ![authenticated put](documentation/testing/postman)      |
+| DELETE | //{id}/ | delete with unauthenticated user | 401      | ![unauthenticated delete](documentation/testing/postman) |
+| DELETE | //{id}/ | delete with valid user           | 204      | ![authenticated delete](documentation/testing/postman)   |
