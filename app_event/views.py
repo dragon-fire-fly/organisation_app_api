@@ -57,7 +57,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
         watches_count=Count("watches", distinct=True),
         memories_count=Count("memory", distinct=True),
     ).order_by("-created_at")
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = EventSerializer
 
 

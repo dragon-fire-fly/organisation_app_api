@@ -25,8 +25,6 @@ class EventSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source="owner.profile.id")
     profile_image = serializers.ReadOnlyField(source="owner.profile.image.url")
-    # start = serializers.DateTimeField(format="%d %b %Y %H:%M")
-    # end = serializers.DateTimeField(format="%d %b %Y %H:%M")
     start = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     end = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     watch_id = serializers.SerializerMethodField()
