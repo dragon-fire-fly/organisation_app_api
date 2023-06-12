@@ -2,26 +2,6 @@ from django.contrib.auth.models import User
 from .models import Post
 from rest_framework import status
 from rest_framework.test import APITestCase
-import jwt
-from datetime import datetime, timedelta
-
-
-# def token(client, username: str, password: str) -> None:
-#     # request JWT token
-#     response = client.post("token/",
-#         data={"username": username, "password": password},
-#     )
-#     # store JWT token
-#     token = response.json().get("access", None)
-
-#     if token:
-#         # set JWT token in header
-#         client.credentials(HTTP_AUTHORIZATION="Bearer " + token)
-#     else:
-#         # unauthorized user!
-#         client.credentials(HTTP_AUTHORIZATION="")
-
-#     # return f"Bearer {token}"
 
 
 class PostListViewTests(APITestCase):
@@ -78,4 +58,18 @@ class PostDetailViewTests(APITestCase):
     def test_user_cant_update_another_users_post(self):
         self.client.login(username="emily", password="pa$$word")
         response = self.client.put("/posts/2/edit/", {"title": "a new title"})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_user_can_delete_own_post(self):
+        self.client.login(username="emily", password="pa$$word")
+        response = self.client.delete("/posts/1/edit/")
+        count = Post.objects.count()
+        self.assertEqual(count, 1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_user_cant_delete_another_users_post(self):
+        self.client.login(username="emily", password="pa$$word")
+        response = self.client.delete("/posts/2/edit/")
+        count = Post.objects.count()
+        self.assertEqual(count, 2)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
