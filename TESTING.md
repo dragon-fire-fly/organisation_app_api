@@ -4,8 +4,9 @@
 
 ## Ci Workflow
 
-A Continuous Integration (CI) workflow was set up on Github actions to monitor the API and run all unittests after each commit.
-This enabled early detection of test failures and therefore faster fixture of bugs.
+A Continuous Integration (CI) workflow was set up on Github actions to monitor the API and run all unittests after each push to the repository.
+
+This workflow performs code checks, installs dependencies, runs database migrations, and executes tests for the project. This enabled early detection of migration problems or test failures and therefore faster fixture of bugs.
 
 The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob/main/.github/workflows/ci.yml) can be found in the github repository for the project.
 
@@ -13,6 +14,8 @@ The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob
 
 All files in the project have been run through the internal pycodestyle linter in VSCode during development.
 In addition, the [Black](https://pypi.org/project/black/) pep8 validation tool was used on all files, installed into my VSCode environment throughout the development of the project. The line-length setting for Black was amended to 79 instead of the default 108 to comply with best practices.
+
+There are no remaining PEP8 issues that I am aware of.
 
 To install and run pycode style:
 
@@ -22,14 +25,24 @@ To install and run pycode style:
 - Select 'Python: Select Linter
 - Select 'pycodestyle' from the list
 - Select the 'Problems' tab in the terminal area at the bottom of the screen
-- PEP8 errors are now displayed in the "problems"tab as well as being underlined in red in files themselves
+- PEP8 errors are now displayed in the "problems" tab as well as being underlined in red in files themselves
 
 ![pycodestyle no errors](documentation/testing/no_problems_pycodestyle.png)
 ![Black PEP8 check](documentation/testing/black-pep8-linting.png)
 
+## Automated Testing
+
+A number of automated tests were written to test the functionality of the API. These tests monitor the responses recieved from the API and ensure the expected responses are received. Automated testing is useful because once written, tests can be run very quickly and help to identify potential problems with reduced the need for manual testing.
+
+The automated tests are execute by running the following command in the terminal:
+`python3 manage.py test`
+
+The test are also run automatically on push as part of the CI workflow mentioned above. The workflow notifies the repository owner by email immediately if the run fails, allowing code leading to failing tests to be fixed quicky.
+
 ## Manual Testing
 
 Manual testing was performed for the API using Postman.
+
 Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user.
 
 The sign up/sign in and JWT token generation was also tested through the `/dj-rest-auth/registration/` and `dj-rest-auth/login/` routes.
@@ -131,7 +144,7 @@ These routes address the following user stories:
 | PUT    | /posts/{id}/edit/ | put with valid user (not post owner)    | 403 forbidden          | ![no permission put](documentation/testing/postman/post-put-no-permission.png)         |
 | PUT    | /posts/{id}/edit/ | put with valid user (post owner)        | 200 success            | ![authenticated put](documentation/testing/postman/post-put-success.png)               |
 | DELETE | /posts/{id}/edit/ | delete with unauthenticated user        | 401 unauthorized       | ![unauthenticated delete](documentation/testing/postman/post-delete-unauthorised.png)  |
-| DELETE | /posts/{id}/edit/ | delete with valid user (not post owner) | 403 forbidden          | ![authenticated delete](documentation/testing/postman/post-delete-no-permission.png)   |
+| DELETE | /posts/{id}/edit/ | delete with valid user (not post owner) | 403 forbidden          | ![no permission delete](documentation/testing/postman/post-delete-no-permission.png)   |
 | DELETE | /posts/{id}/edit/ | delete with valid user (post owner)     | 204 no content         | ![authenticated delete](documentation/testing/postman/post-delete-success.png)         |
 
 </details>
@@ -236,7 +249,7 @@ These routes address the following user stories:
 | POST   | /likes/      | post with authenticated user            | 201 created      | ![authenticated post](documentation/testing/postman/like-post-success.png)            |
 | GET    | /likes/{id}/ | detail view                             | 200 success      | ![get detail view](documentation/testing/postman/like-get-success.png)                |
 | DELETE | /likes/{id}/ | delete with unauthenticated user        | 401 unauthorized | ![unauthenticated delete](documentation/testing/postman/like-delete-unauthorised.png) |
-| DELETE | /likes/{id}/ | delete with valid user (not like owner) | 403 forbidden    | ![authenticated delete](documentation/testing/postman/like-delete-no-permission.png)  |
+| DELETE | /likes/{id}/ | delete with valid user (not like owner) | 403 forbidden    | ![no permission delete](documentation/testing/postman/like-delete-no-permission.png)  |
 | DELETE | /likes/{id}/ | delete with valid user (like owner)     | 204 no content   | ![authenticated delete](documentation/testing/postman/like-delete-success.png)        |
 
 </details>
