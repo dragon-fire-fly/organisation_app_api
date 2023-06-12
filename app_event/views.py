@@ -1,6 +1,6 @@
 from django.db.models import Count
 from organisation_app.permissions import IsOwnerOrReadOnly
-from .serializers import EventSerializer, CalendarEventSerializer
+from .serializers import EventSerializer
 from .models import Event
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -57,8 +57,14 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
         watches_count=Count("watches", distinct=True),
         memories_count=Count("memory", distinct=True),
     ).order_by("-created_at")
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
+
+class EventDetailAddEvent(EventDetail):
+    """
+    Similar to EventDetail but allows edit from authenticated user on calendar field only.
+    """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class CustomEventPagination(PageNumberPagination):

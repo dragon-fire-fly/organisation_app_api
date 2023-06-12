@@ -110,32 +110,3 @@ class EventSerializer(serializers.ModelSerializer):
             "past",
         ]
 
-
-class CalendarEventSerializer(EventSerializer):
-    start = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-    end = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
-
-    class Meta:
-        model = Event
-        fields = [
-            "id",
-            "owner",
-            "is_owner",
-            "profile_id",
-            "profile_image",
-            "title",
-            "content",
-            "image",
-            "event_type",
-            "location",
-            "link",
-            "start",
-            "end",
-            "timezone",
-            "all_day",
-            "privacy",
-            "watch_id",
-            "watches_count",
-            "memories_count",
-            "calendars",
-        ]
