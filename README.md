@@ -17,9 +17,11 @@ Link to the front-end repository - [EventTrove Back-End Repo](https://github.com
 
 All user stories can be found in the [User Story grid](https://docs.google.com/spreadsheets/d/1-8NA5gjndIE3oYSuDAwsheJqryA4tlZQ6CmLRp4fKt8/edit?usp=sharing)
 
-Each user story has details of it's EPIC, the user story number, the title, user story, acceptance criteria and both the backend and frontend tasks (with link to backend and frontend issues).
+In the grid, each user story has details of it's EPIC, the user story number, the title, user story, acceptance criteria and both the backend and frontend tasks (with link to backend and frontend issues).
 
-User story testing may be found in the [Testing documentation](TESTING.md)
+More details about Agile and use stories may be found in the [frontend repository](https://github.com/dragon-fire-fly/organisation_app_frontend) for this project.
+
+User story testing may be found in the [Testing](TESTING.md) documentation.
 
 ## Database Design
 
@@ -29,7 +31,9 @@ User story testing may be found in the [Testing documentation](TESTING.md)
 
 ### Models
 
-The following models are taken from the Code Institute Moments walkthrough tutorial:
+There are a total of 9 models present in this project.
+
+The following 5 models are taken from the Code Institute Moments walkthrough tutorial:
 
 - Post
 - Comment
@@ -37,7 +41,7 @@ The following models are taken from the Code Institute Moments walkthrough tutor
 - Follower
 - Profile
 
-The folowing models are custom:
+The folowing 4 models are custom:
 
 - Event  
   This model is based on the `Post` model, but has many additional fields, including the following:
@@ -62,7 +66,7 @@ The folowing models are custom:
 
   The calendar model also has a timezone field. This field retrieves the user's timezone from their IP address using the [timezoneapi.io](https://timezoneapi.io) API with a token stored in the application's hidden variables. If the user's ip address cannot be determined in this way, the default value of "UTC" is used.
 
-  This is part of a future feature concerned with connecting the application to the Google Calendar API. When creating events, it is crucial that the correct timezone is used, otherwise the event time will inaccurate and any reminders set up will display at the wrong point. Unfotunately, this feature is not yet implemented in the frontend of the application.
+  This is part of a future feature concerned with connecting the application to the Google Calendar API. When creating events, it is crucial that the correct timezone is used, otherwise the event time will inaccurate and any reminders set up will display at the wrong point. This feature is not yet implemented in the frontend of the application, but is planned for the near future.
 
 ## Features
 
@@ -248,6 +252,7 @@ If the route for a non existant post is entered, a 404 error is returned
 ### Future Features
 
 Connect to the Google Calendar API
+Email notifications (when requested) to remind users about events and send a weekly/monthly digest of events
 
 ## Testing
 
@@ -293,10 +298,13 @@ Deployment steps are as follows, after account setup:
 
 | Key                     | Value                                                                |
 | ----------------------- | -------------------------------------------------------------------- |
+| `ALLOWED_HOST`          | user's deployed API URL                                              |
+| `CLIENT_ORIGIN`         | user's deployed frontend URL                                         |
 | `CLOUDINARY_URL`        | user's own value                                                     |
 | `DATABASE_URL`          | user's own value                                                     |
 | `DISABLE_COLLECTSTATIC` | 1 (_this is temporary, and can be removed for the final deployment_) |
 | `SECRET_KEY`            | user's own value                                                     |
+| `TIME_ZONE_TOKEN`       | (optional) user's own value if the time zone API is used             |
 
 Heroku needs two additional files in order to deploy properly.
 
@@ -394,7 +402,31 @@ You can fork this repository by using the following steps:
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
-## References
+## Technologies and Tools
+
+- [Python](https://www.python.org) used as the back-end programming language.
+- [Django Rest Framework](https://www.django-rest-framework.org/) - A python based framework for building APIs.
+- [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`)
+- [GitHub](https://github.com) used for secure online code storage.
+- [PostgreSQL](https://www.postgresql.org) used as the relational database management.
+- [ElephantSQL](https://www.elephantsql.com) used as the Postgres database.
+- [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
+- [Cloudinary](https://cloudinary.com) used for online static file storage.
+- [Visual Studio Code](https://code.visualstudio.com/) used as a local IDE for development.
+- [Black](https://pypi.org/project/black/) used as a PEP8 compliant Python code formatter.
+- [DBeaver](https://dbeaver.io/) used to produce ERDs and help plan the database models.
+
+## Credits
+
+### References
 
 Creating events in google calendar: https://developers.google.com/calendar/api/guides/create-events
-for obtaining user's timezone: https://www.youtube.com/watch?v=lUe_-WnrPUE
+Obtaining user's timezone: https://www.youtube.com/watch?v=lUe_-WnrPUE
+
+### Acknowledgements
+
+- I would like to thank my Code Institute mentor, Martina Terlevic for her support throughout the development of this project.
+- I would like to thank my previous Code Institute mentor, [Tim Nelson](https://github.com/TravelTimN). Although he isn't my mentor anymore, his previous support and guidance still helps me every day.
+- I would like to thank the [Code Institute](https://codeinstitute.net) tutor team for their assistance with troubleshooting and debugging some project issues.
+- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com), particularly the class of May 2022, for the moral support; it kept me going during periods of self doubt and imposter syndrome.
+- I would like to thank my husband (Christian Schmidt), for believing in me, and allowing me to make this transition into software development.
