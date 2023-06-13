@@ -109,4 +109,3 @@ class EventSerializer(serializers.ModelSerializer):
             "posts",
             "past",
         ]
-

@@ -60,10 +60,13 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = EventSerializer
 
+
 class EventDetailAddEvent(EventDetail):
     """
-    Similar to EventDetail but allows edit from authenticated user on calendar field only.
+    Similar to EventDetail but allows edit from authenticated
+    user on calendar field only.
     """
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
