@@ -5,13 +5,13 @@ This interactive platform includes the option to view, add, edit and delete even
 
 The project has been split into two parts - the back-end constructed with [Django REST Framework](https://www.django-rest-framework.org/) and the frontend supercharged with [React](https://react.dev/).
 
-More information on the front-end of the site can be found in the [front-end README](https://github.com/dragon-fire-fly/organisation_app_frontend).
+More information on the front-end of the site can be found in the [front-end repository](https://github.com/dragon-fire-fly/organisation_app_frontend).
 
 Link to the live site - [EventTrove Live Site](https://organisation-app-frontend.herokuapp.com/)
 
 Link to the live API - [EventTrove Live API](https://organisation-app-api.herokuapp.com/)
 
-Link to the front-end repository - [EventTrove Back-End Repo](https://github.com/dragon-fire-fly/organisation_app_frontend)
+Link to the front-end repository - [EventTrove Front-End Repo](https://github.com/dragon-fire-fly/organisation_app_frontend)
 
 ## User Stories
 
@@ -27,7 +27,7 @@ User story testing may be found in the [Testing](TESTING.md) documentation.
 
 ### API Entity Relationship Diagram
 
-The following diagram (created from actual django models) was created in [DBeaver](https://dbeaver.io/) and shows the relationship between all the entities in the database. Each table relates to a specific model created in Django Rest Framework. There are a total of 11 tables - one for each of the 9 models, plus the auth_user (defauly User model rom Django) and the many-to-many intermediate table (between event and calendar).
+The following diagram (created from actual django models) was created in [DBeaver](https://dbeaver.io/) and shows the relationship between all the entities in the database. Each table relates to a specific model created in Django Rest Framework. There are a total of 11 tables - one for each of the 9 models, plus the auth_user (default User model from Django) and the many-to-many intermediate table (between event and calendar).
 
 ![API ERD](documentation/api-erd.png)
 
@@ -104,14 +104,15 @@ Below are all of the valid endpoints for the API, seperated into their respectiv
 <details> 
 <summary>More details about Events</summary>
 
-| HTTP   | URI                     | CRUD Operation                         | View name |
-| ------ | ----------------------- | -------------------------------------- | --------- |
-| GET    | /events/                | list all events                        | LIST      |
-| POST   | /events/                | create an event entry                  | LIST      |
-| GET    | /event/{id}/            | retrieve a specific event entry        | DETAIL    |
-| PUT    | /event/{id}/            | update a specific event entry          | DETAIL    |
-| DELETE | /event/{id}/            | delete a specific event entry          | DETAIL    |
-| GET    | /events/calendars/{id}/ | list all events in a specific calendar | LIST      |
+| HTTP   | URI                             | CRUD Operation                                                                                                             | View name |
+| ------ | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------- |
+| GET    | /events/                        | list all events                                                                                                            | LIST      |
+| POST   | /events/                        | create an event entry                                                                                                      | LIST      |
+| GET    | /event/{id}/                    | retrieve a specific event entry                                                                                            | DETAIL    |
+| PUT    | /event/{id}/                    | update a specific event entry                                                                                              | DETAIL    |
+| DELETE | /event/{id}/                    | delete a specific event entry                                                                                              | DETAIL    |
+| GET    | /events/calendars/{id}/         | list all events in a specific calendar                                                                                     | LIST      |
+| GET    | /events/calendars/{id}/addevent | route to specifically allow edit of the event resource by any user (for the purpose of adding the event to their calendar) | DETAIL    |
 
 Event list route. Authenticated users can also create new events on this route
 ![event list route](documentation/features/events.png)
@@ -253,8 +254,10 @@ If the route for a non existant post is entered, a 404 error is returned
 
 ### Future Features
 
-Connect to the Google Calendar API
-Email notifications (when requested) to remind users about events and send a weekly/monthly digest of events
+- Connect to the Google Calendar API
+- Integration of google maps to determin precise location
+- Email notifications (when user agrees) to remind users about events and send a weekly/monthly digest of upcoming/recently passed events
+- Inclusion of a weather API to diplay the weather forecast for each event (according to their location)
 
 ## Testing
 
@@ -423,8 +426,9 @@ You can fork this repository by using the following steps:
 
 ### References
 
-Creating events in google calendar: https://developers.google.com/calendar/api/guides/create-events
-Obtaining user's timezone: https://www.youtube.com/watch?v=lUe_-WnrPUE
+- Code Institute's "Moments" walkthrough project
+- Obtaining user's timezone: https://www.youtube.com/watch?v=lUe_-WnrPUE
+- Creating events in google calendar: https://developers.google.com/calendar/api/guides/create-events
 
 ### Acknowledgements
 
