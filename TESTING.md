@@ -10,6 +10,44 @@ This workflow performs code checks, installs dependencies, runs database migrati
 
 The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob/main/.github/workflows/ci.yml) can be found in the github repository for the project.
 
+Some settings were amended to allow the CI to correctly access the application. This includes the following if statements to check whether the GITHUB_WORKFLOW is being used:
+
+```
+if os.getenv("GITHUB_WORKFLOW"):
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    CORS_ORIGIN_ALLOW_ALL = False
+
+if os.getenv("GITHUB_WORKFLOW"):
+    CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+else:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get("CLIENT_ORIGIN"),
+    ]
+
+if os.getenv("GITHUB_WORKFLOW"):
+    # check if in GITHUB ACTION MODE
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    # check if unittest running locally
+    if "test" in sys.argv[0] or "test" in sys.argv[1]:
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": BASE_DIR / "db.sqlite3",
+            }
+        }
+    else:
+        DATABASES = {
+            "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        }
+```
+
 ![ci workflow](documentation/testing/github-ci-workflow.png)
 
 ## PEP8
@@ -27,23 +65,50 @@ To install and run pycode style:
 - Select the 'Problems' tab in the terminal area at the bottom of the screen
 - PEP8 errors are now displayed in the "problems" tab as well as being underlined in red in files themselves
 
-![pycodestyle no errors](documentation/testing/no_problems_pycodestyle.png)
+![pycodestyle no errors](documentation/testing/no-problems-pycodestyle.png)
 ![Black PEP8 check](documentation/testing/black-pep8-linting.png)
 
 In addition, the [Code Institute pep8 linter](https://pep8ci.herokuapp.com/) was used on all files to test for pep8 issues. An example page is shown below:
 
 ![CI pep8 linter](documentation/testing/ci-pep8-linter.png)
 
-&check;
+In the settings.py file, there are 4 lines which come as default with Django which throw a "line too long" error and cannot be broken down without compromising code functionality. For these lines (settings.py 184, 189, 194 and 199) have had the # noqa comment added to the end of them to exclude them from code validation. These are the only lines which are exempted in this way.
+
+```
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa
+    },
+]
+```
+
+- organisation_app base application
+  | file | pass |
+  | -------------- | ------------------ |
+  | settings.py |&check; |
+  | serializers.py | &check; |
+  | urls.py | &check; |
+  | views.py | &check; |
+  | permissions.py | &check; |
+  | wsgi.py | &check; |
 
 - app_calendar
 
   | file           | pass               |
   | -------------- | ------------------ |
   | models.py      | &#10060; see below |
-  | serializers.py |                    |
-  | urls.py        |                    |
-  | views.py       |                    |
+  | serializers.py | &check;            |
+  | urls.py        | &check;            |
+  | views.py       | &check;            |
 
   One warning found in models.py about using a bare except. In this case, the specific exception that occurs if the try block is unsuccessful was unknown and so the bare except statement was left.
   ![bare except](documentation/testing/bare-except.png)
@@ -135,7 +200,7 @@ The test are also run automatically on push as part of the CI workflow mentioned
 
 Manual testing was performed for the API using Postman.
 
-Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user.
+Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user. Validatyion was also tested - for example an empty login form cannot be submitted.
 
 The sign up/sign in and JWT token generation was also tested through the `/dj-rest-auth/registration/` and `dj-rest-auth/login/` routes.
 
