@@ -15,8 +15,6 @@ The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob
 All files in the project have been run through the internal pycodestyle linter in VSCode during development.
 In addition, the [Black](https://pypi.org/project/black/) pep8 validation tool was used on all files, installed into my VSCode environment throughout the development of the project. The line-length setting for Black was amended to 79 instead of the default 108 to comply with best practices.
 
-There are no remaining PEP8 issues that I am aware of.
-
 To install and run pycode style:
 
 - Run the command 'pip3 install -r requirements.txt'
@@ -29,6 +27,98 @@ To install and run pycode style:
 
 ![pycodestyle no errors](documentation/testing/no_problems_pycodestyle.png)
 ![Black PEP8 check](documentation/testing/black-pep8-linting.png)
+
+In addition, the [Code Institute pep8 linter](https://pep8ci.herokuapp.com/) was used on all files to test for pep8 issues. An example page is shown below:
+
+![CI pep8 linter](documentation/testing/ci-pep8-linter.png)
+
+&check;
+
+- app_calendar
+
+  | file           | pass               |
+  | -------------- | ------------------ |
+  | models.py      | &#10060; see below |
+  | serializers.py |                    |
+  | urls.py        |                    |
+  | views.py       |                    |
+
+  One warning found in models.py about using a bare except. In this case, the specific exception that occurs if the try block is unsuccessful was unknown and so the bare except statement was left.
+  ![bare except](documentation/testing/bare-except.png)
+
+- app_comment
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+
+- app_event
+  |file | pass |
+  |-----|------|
+  | models.py | &check;|
+  | serializers.py |&check; |
+  | urls.py | &check;|
+  | views.py | &check;|
+  | tests.py | &check;|
+
+- app_follower
+  |file | pass |
+  |-----|------|
+  | models.py | &check; |
+  | serializers.py | &check; |
+  | urls.py | &check; |
+  | views.py | &check; |
+
+- app_like
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+
+- app_memory
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+
+- app_post
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+  | tests.py       | &check; |
+
+- app_profile
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+
+- app_watch
+
+  | file           | pass    |
+  | -------------- | ------- |
+  | models.py      | &check; |
+  | serializers.py | &check; |
+  | urls.py        | &check; |
+  | views.py       | &check; |
+
+There are no remaining PEP8 issues that I am aware of.
 
 ## Automated Testing
 
