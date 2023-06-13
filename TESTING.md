@@ -191,16 +191,16 @@ There are no remaining PEP8 issues that I am aware of.
 
 A number of automated tests were written to test the functionality of the API. These tests monitor the responses recieved from the API and ensure the expected responses are received. Automated testing is useful because once written, tests can be run very quickly and help to identify potential problems with reduced the need for manual testing.
 
-The automated tests are execute by running the following command in the terminal:
+The automated tests are executed by running the following command in the terminal:
 `python3 manage.py test`
 
-The test are also run automatically on push as part of the CI workflow mentioned above. The workflow notifies the repository owner by email immediately if the run fails, allowing code leading to failing tests to be fixed quicky.
+The tests are also run automatically on push as part of the CI workflow mentioned above. The workflow notifies the repository owner by email immediately if the run fails, allowing code leading to failing tests to be fixed quicky.
 
 ## Manual Testing
 
-Manual testing was performed for the API using Postman.
+Manual testing was performed for the API using [Postman](https://www.postman.com/).
 
-Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user. Validatyion was also tested - for example an empty login form cannot be submitted.
+Postman is an API tool that allows routes to be tested from outside the browser. This helps with building and testing of APIs. Here, each possible route was tested with authorised and unauthorised users to check that the correct responses were recieved for each route, depending on the level of permission of the user. Validation was also tested - for example an empty login form cannot be submitted.
 
 The sign up/sign in and JWT token generation was also tested through the `/dj-rest-auth/registration/` and `dj-rest-auth/login/` routes.
 
@@ -492,4 +492,4 @@ Many bugs were found and resolved throughout the development of the app. Many of
 
 One bug was found during testing where a newly created event was not automatically added to that user's calendar. This bug could not be reproduced with further testing, but could occur again in the future.
 
-Details about this bug can be found in its [Github issue](https://github.com/dragon-fire-fly/organisation_app_api/issues/46).
+Details about this bug can be found in its [Github issue](https://github.com/dragon-fire-fly/organisation_app_api/issues/46). As it could not be reproduced, the issue has been closed for now.
