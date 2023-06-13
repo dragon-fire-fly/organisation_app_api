@@ -27,7 +27,9 @@ User story testing may be found in the [Testing](TESTING.md) documentation.
 
 ### API Entity Relationship Diagram
 
-![API ERD](documentation/API_ERD2.png)
+The following diagram (created from actual django models) was created in [DBeaver](https://dbeaver.io/) and shows the relationship between all the entities in the database. Each table relates to a specific model created in Django Rest Framework. There are a total of 11 tables - one for each of the 9 models, plus the auth_user (defauly User model rom Django) and the many-to-many intermediate table (between event and calendar).
+
+![API ERD](documentation/api-erd.png)
 
 ### Models
 
@@ -415,6 +417,7 @@ You can fork this repository by using the following steps:
 - [Visual Studio Code](https://code.visualstudio.com/) used as a local IDE for development.
 - [Black](https://pypi.org/project/black/) used as a PEP8 compliant Python code formatter.
 - [DBeaver](https://dbeaver.io/) used to produce ERDs and help plan the database models.
+- [Postman](https://www.postman.com/) used to test API routes.
 
 ## Credits
 
