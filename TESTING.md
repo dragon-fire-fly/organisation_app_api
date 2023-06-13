@@ -10,6 +10,8 @@ This workflow performs code checks, installs dependencies, runs database migrati
 
 The [workflow file](https://github.com/dragon-fire-fly/organisation_app_api/blob/main/.github/workflows/ci.yml) can be found in the github repository for the project.
 
+![ci workflow](documentation/testing/github-ci-workflow.png)
+
 ## PEP8
 
 All files in the project have been run through the internal pycodestyle linter in VSCode during development.
@@ -418,3 +420,11 @@ These routes address the following user stories:
 | DELETE | /followers/{id}/ | delete with valid user (owner)     | 204 no content                                                                                                       | ![authenticated delete](documentation/testing/postman/follower-delete-success.png)           |
 
 </details>
+
+## Bugs
+
+Many bugs were found and resolved throughout the development of the app. Many of these were to do with the CORS headers to allow the frontend application to connect to the backend API.
+
+One bug was found during testing where a newly created event was not automatically added to that user's calendar. This bug could not be reproduced with further testing, but could occur again in the future.
+
+Details about this bug can be found in its [Github issue](https://github.com/dragon-fire-fly/organisation_app_api/issues/46).
