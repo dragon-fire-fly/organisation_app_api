@@ -2,20 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from app_calendar.models import Calendar
 import pytz
-import requests
-import os
-
-if os.path.exists("env.py"):
-    import env
-
-# API request for timezone info
-TIME_ZONE_TOKEN = os.environ.get("TIME_ZONE_TOKEN")
-try:
-    # response = requests.get(f'https://timezoneapi.io/api/ip/?token={TIME_ZONE_TOKEN}')
-    data = response.json()
-    timezone = data["data"]["timezone"]["id"]
-except:
-    timezone = "UTC"
 
 EVENT_TYPES = [
     ("Educational", "Educational"),
@@ -51,7 +37,6 @@ class Event(models.Model):
     """
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    # google_event_id = ...
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
